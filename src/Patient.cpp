@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Patient.h"
-#include <string>
 
 using namespace std;
 
