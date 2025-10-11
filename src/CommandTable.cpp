@@ -5,6 +5,8 @@
 #include <functional>
 #include <vector>
 #include <limits>
+#include <string>
+#include <limits>
 
 
 using namespace std;
@@ -33,8 +35,10 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
                               cout << "Enter Admission Date: ";
                               cin >> admissionDate;
 
+                              cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                               cout << "Enter Patient Name: ";
-                              cin >> nameOfPatient;
+                              getline(cin, nameOfPatient);
                               data.push_back(Patient(id, admissionDate, nameOfPatient));
                     }
                     else
