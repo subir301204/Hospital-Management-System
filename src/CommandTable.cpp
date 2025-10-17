@@ -60,6 +60,7 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
                     cout << " create    - Create a new account\n";
                     cout << " details   - Show Patient details\n";
 		            cout << " cls       - Clears the screen\n";
+                    cout << " list      - List of details of all patients\n";
                     cout << " help      - Show all available commands\n";
                     cout << " exit      - Save and exit the program\n";
           };
