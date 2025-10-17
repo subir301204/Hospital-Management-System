@@ -7,6 +7,7 @@
 #include <limits>
 #include <string>
 #include <limits>
+#include <fstream>
 
 
 using namespace std;
@@ -57,7 +58,8 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
           commands["help"] = [&]() {
                     cout << "\n=======Available Commands=======\n";
                     cout << " create    - Create a new account\n";
-                    cout << " details   - Show Patient details\n"; 
+                    cout << " details   - Show Patient details\n";
+		            cout << " cls       - Clears the screen\n";
                     cout << " help      - Show all available commands\n";
                     cout << " exit      - Save and exit the program\n";
           };
@@ -68,5 +70,26 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
                     exit(0);
           };
 
+	  commands["cls"] = [&]() {
+	  	    system("cls");
+	  };
+
+      commands["list"] = [&]() {
+            ifstream file("data/data.txt");
+
+            if (!file) {
+              cout << "Unable to open the file!!!" << endl;
+              return 1;
+            }
+
+            cout << "\n=======List Of Patients=======\n";
+
+            string line;
+            while (getline(file, line))
+                cout << line << endl;
+            
+            file.close();
+      }; 
+          
           return commands;
 }
