@@ -41,6 +41,9 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
       cout << "Enter Patient Name: ";
       getline(cin, nameOfPatient);
       data.push_back(Patient(id, admissionDate, nameOfPatient));
+
+      saveToFile(data);
+      cout << "\nData saved.\n";
     }
     else
       cout << "\nAccount already exists!\n";
@@ -66,8 +69,8 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
   };
 
   commands["exit"] = [&]() {
-    saveToFile(data);
-    cout << "\nData saved. Exiting program...\n";
+    cout << "\nExiting the program...\n";
+    cout << "\nGOODBYE!!!  :)\n\n";
     exit(0);
   };
 

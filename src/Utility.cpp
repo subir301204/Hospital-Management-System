@@ -16,7 +16,7 @@ void saveToFile(const vector<Patient> &data) {
     return;
   }
 
-  cout << "Saving " << data.size() << " records...\n";
+  cout << "Saving new records...\n";
 
   for (auto &da : data)
     fout << da.getID() << " " << da.getAdmissionDate() << " " << da.getName() << "\n";
