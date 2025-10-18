@@ -7,20 +7,20 @@ Patient::Patient(int pID, string admissionDate, string nameOfPatient) : pID(pID)
 
 
 int Patient::getID() const {
-          return pID;
+  return pID;
 }
 
 string Patient::getAdmissionDate() const {
-          return admissionDate;
+  return admissionDate;
 }
 
 string Patient::getName() const {
-          return nameOfPatient;
+  return nameOfPatient;
 }
 
 void Patient::displayPatientDetails() const {
-          cout << "\n=======Patient Details=======\n";
-          cout << "Patient Name: " << getName() << "\n";
-          cout << "Patient ID: " << getID() << "\n";
-          cout << "Admission Date: " << getAdmissionDate() << "\n";
+  cout << "\n=======Patient Details=======\n";
+  cout << "Patient Name: " << getName() << "\n";
+  cout << "Patient ID: " << getID() << "\n";
+  cout << "Admission Date: " << getAdmissionDate() << "\n";
 }

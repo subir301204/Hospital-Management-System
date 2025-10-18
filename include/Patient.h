@@ -7,22 +7,22 @@
 using namespace std;
 
 class Patient {
-          private:
-                    int pID;
-                    string admissionDate;
-                    string nameOfPatient;
+  private:
+    int pID;
+    string admissionDate;
+    string nameOfPatient;
 
-          public:
-                    // constructor
-                    Patient(int pID, string admissionDate, string nameOfPatient);
+  public:
+    // constructor
+    Patient(int pID, string admissionDate, string nameOfPatient);
 
-                    // getter functions
-                    int getID() const;
-                    string getAdmissionDate() const;
-                    string getName() const;
+    // getter functions
+    int getID() const;
+    string getAdmissionDate() const;
+    string getName() const;
 
-                    // display functions
-                    void displayPatientDetails() const;
+    // display functions
+    void displayPatientDetails() const;
 };
 
 #endif                        // Include gard ended
