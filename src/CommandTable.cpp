@@ -58,13 +58,13 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
       cout << "Patient not found!!!";
   };
 
-  commands["help"] = [&]() {
+  commands["?"] = [&]() {
     cout << "\n=======Available Commands=======\n";
     cout << " create    - Create a new account\n";
     cout << " details   - Show Patient details\n";
     cout << " cls       - Clears the screen\n";
     cout << " list      - List of details of all patients\n";
-    cout << " help      - Show all available commands\n";
+    cout << " ?         - Show all available commands\n";
     cout << " exit      - Exit the program\n";
   };
 
