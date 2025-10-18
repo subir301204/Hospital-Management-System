@@ -9,6 +9,7 @@
 #include <limits>
 #include <fstream>
 
+bool inAdvancedMode = false;
 
 using namespace std;
 
@@ -50,22 +51,38 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
   };
 
   commands["details"] = [&]() {
-    cout << "\n=======Patient Details=======\n";
-    int index = searchPatient(data);
-    if (index != -1)
-      data[index].displayPatientDetails();
+    if (inAdvancedMode) {
+      cout << "\n=======Patient Details=======\n";
+      int index = searchPatient(data);
+      if (index != -1)
+        data[index].displayPatientDetails();
+      else
+        cout << "Patient not found!!!";
+    }
     else
-      cout << "Patient not found!!!";
+      cout << "\n##########Switch to Advanced Mode for this command##########\n";
   };
 
   commands["?"] = [&]() {
-    cout << "\n=======Available Commands=======\n";
-    cout << " create    - Create a new account\n";
-    cout << " details   - Show Patient details\n";
-    cout << " cls       - Clears the screen\n";
-    cout << " list      - List of details of all patients\n";
-    cout << " ?         - Show all available commands\n";
-    cout << " exit      - Exit the program\n";
+    if (!inAdvancedMode) {
+      cout << "\n=======Available Commands=======\n";
+      cout << " create    - Create a new account\n";
+      cout << " cls       - Clears the screen\n";
+      cout << " switch    - Switch between Normal and Advanced mode\n";
+      cout << " ?         - Show all available commands\n";
+      cout << " exit      - Exit the program\n";
+    }
+    else {
+      cout << "\n=======Available Commands In Advaced Mode=======\n";
+      cout << " create    - Create a new account\n";
+      cout << " details   - Show Patient details\n";
+      cout << " cls       - Clears the screen\n";
+      cout << " list      - List of details of all patients\n";
+      cout << " switch    - Switch between Normal and Advanced mode\n";
+      cout << " delete    - Delete a spacific Patient record\n";
+      cout << " ?         - Show all available commands\n";
+      cout << " exit      - Exit the program\n";
+    }
   };
 
   commands["exit"] = [&]() {
@@ -79,21 +96,57 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
   };
 
   commands["list"] = [&]() {
-    ifstream file("data/data.txt");
+    if (inAdvancedMode) {
+      ifstream file("data/data.txt");
 
-    if (!file) {
-      cout << "Unable to open the file!!!" << endl;
-      return 1;
-    }
+      if (!file) {
+        cout << "Unable to open the file!!!" << endl;
+        return 1;
+      }
 
-    cout << "\n=======List Of Patients=======\n";
+      cout << "\n=======List Of Patients=======\n";
 
-    string line;
-    while (getline(file, line))
-      cout << line << endl;
+      string line;
+      while (getline(file, line))
+        cout << line << endl;
             
       file.close();
-  }; 
+    }
+    else
+      cout << "\n##########Switch to Advanced Mode for this command##########\n";
+  };
+
+  commands["switch"] = [&]() {
+    if (inAdvancedMode) {
+      cout << "\n----------------------------\n\n";
+      cout << "Switching to NORMAL Mode...\n";
+      cout << "\n----------------------------\n";
+
+      inAdvancedMode = false;
+    }
+    else {
+      if (checkPassword()) {
+        cout << "\n----------------------------\n\n";
+        cout << "Switching to ADVANCED Mode...\n";
+        cout << "\n----------------------------\n";
+
+        inAdvancedMode = true;
+      }
+      else
+        cout << "\n##########Access Denied##########\n";
+    }
+  };
+
+  // Advanced commands
+
+  commands["delete"] = [&]() {
+    if (inAdvancedMode) {
+      int index = searchPatient(data);
+      deleteRecord(data, index);
+    }
+    else
+      cout << "\n##########Switch to Advanced Mode for this command##########\n";
+  };
           
   return commands;
 }

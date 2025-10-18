@@ -1,5 +1,6 @@
 #include "Patient.h"
 #include "Utility.h"
+#include "CommandTable.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -19,7 +20,7 @@ int main() {
 
   string cmd;
   while (true) {
-    cout << "\n> ";
+    cout << (inAdvancedMode ? "\n[ADVANCED]>" : "\n>");
     cin >> cmd;
 
     if (commands.count(cmd))

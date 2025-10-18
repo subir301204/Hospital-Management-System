@@ -53,8 +53,8 @@ int searchPatient(vector<Patient> &data) {
       cout << "Invalid input. Try again...";
     }
     else {
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    break;
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      break;
     }
   }
 
@@ -84,5 +84,54 @@ string getHiddenInput() {
 
   cout << endl;
   return input;
+}
+
+// Function to check password validity
+bool checkPassword() {
+  ifstream fin("data/password.txt");
+  if (!fin) {
+    cerr << "No password file found. Please create one first.\n";
+    return false;
+  }
+
+  string stored, input;
+  getline(fin, stored);
+  fin.close();
+
+  cout << "Enter admin password: ";
+  input = getHiddenInput();
+  
+  return (input == stored);
+}
+
+// Function to delete a spacific record
+void deleteRecord(const vector<Patient> &data, const int lineIndex) {
+  ifstream fin("data/data.txt");
+  if (!fin) {
+    cerr << "Error: Unable to open the file!\n";
+    return;
+  }
+
+  vector<string> lines;
+  string line;
+
+  while (getline(fin, line))
+    lines.push_back(line);
+  fin.close();
+
+  // Remove the spacific line
+  lines.erase(lines.begin() + lineIndex);
+
+  ofstream fout("data/data.txt");
+  if(!fout) {
+    cerr << "Error: Unable to write to file!\n";
+    return;
+  }
+
+  for (const string &l : lines)
+    fout << l << "\n";
+  fout.close();
+
+  cout << "\nRecord has been deleted...\n";
 }
 

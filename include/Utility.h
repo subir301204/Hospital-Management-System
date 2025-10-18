@@ -31,6 +31,10 @@ int searchPatient(vector<Patient> &data);
 // Function to get hidden inputs
 string getHiddenInput();
 
-// Function to create passwords
+// Function to check password validity
+bool checkPassword();
+
+// Function to delete a spacific record from the data/data.txt
+void deleteRecord(const vector<Patient> &data, const int lineIndex);
 
 #endif
