@@ -34,10 +34,17 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
 
     int index = searchPatient(data, id);
     if (index == -1) {
-      cout << "Enter Admission Date: ";
-      cin >> admissionDate;
+      while (true) {
+        cout << "Enter Admission Date (DD-MM-YYYY): ";
+        cin >> admissionDate;
 
-      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        if (checkDateFormat(admissionDate))
+          break;
+        else
+          cerr << "\nError: Invalid date format. Try again...\n\n";
+      }
 
       cout << "Enter Patient Name: ";
       getline(cin, nameOfPatient);

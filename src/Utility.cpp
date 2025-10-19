@@ -4,6 +4,7 @@
 #include <vector>
 #include <limits>
 #include <conio.h>
+#include <regex>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ void saveToFile(const vector<Patient> &data) {
     return;
   }
 
-  cout << "Saving new records...\n";
+  cout << "\nSaving new records...\n";
 
   for (auto &da : data)
     fout << da.getID() << " " << da.getAdmissionDate() << " " << da.getName() << "\n";
@@ -105,33 +106,28 @@ bool checkPassword() {
 }
 
 // Function to delete a specific record
-void deleteRecord(const vector<Patient> &data, const int lineIndex) {
-  ifstream fin("data/data.txt");
-  if (!fin) {
-    cerr << "Error: Unable to open the file!\n";
-    return;
-  }
-
-  vector<string> lines;
-  string line;
-
-  while (getline(fin, line))
-    lines.push_back(line);
-  fin.close();
-
-  // Remove the specific line
-  lines.erase(lines.begin() + lineIndex);
+void deleteRecord(vector<Patient> &data, const int lineIndex) {
+  data.erase(data.begin() + lineIndex);
 
   ofstream fout("data/data.txt");
-  if(!fout) {
-    cerr << "Error: Unable to write to file!\n";
+  if (!fout) {
+    cerr << "\nError: Unable to write to file!\n";
     return;
   }
 
-  for (const string &l : lines)
-    fout << l << "\n";
+  for (auto &d : data)
+    fout << d.getID() << d.getAdmissionDate() << d.getName() << '\n';
   fout.close();
 
-  cout << "\nRecord has been deleted...\n";
+  cout << "\nRecord deleted successfully.\n";
 }
 
+// Function to check admission date format validity
+bool checkDateFormat(string date) {
+  regex dateFormat(R"(^\d{2}-\d{2}-\d{4}$)");   // Format: DD-MM-YYYY
+
+  if (regex_match(date, dateFormat))
+    return true;
+  else
+    return false;
+}

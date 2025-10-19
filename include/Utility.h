@@ -35,6 +35,9 @@ string getHiddenInput();
 bool checkPassword();
 
 // Function to delete a specific record from the data/data.txt
-void deleteRecord(const vector<Patient> &data, const int lineIndex);
+void deleteRecord(vector<Patient> &data, const int lineIndex);
+
+// Function to check admission date format validity
+bool checkDateFormat(string date);
 
 #endif
