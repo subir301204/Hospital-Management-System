@@ -1,3 +1,11 @@
 # HOSPITAL MANAGEMENT SYSTEM
 
-I am building this project as a hobby project. I want to make this project usable by users and grow it more.
+Hello everyone!  
+I have made this command line tool project just out of curiosity.  
+
+## Requirements
+- Latest Cpp compiler (It will be esy with gcc/g++)
+
+## How to compile and run
+> g++ src/*.cpp -I include -o main  
+> ./main
