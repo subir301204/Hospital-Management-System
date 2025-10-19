@@ -16,7 +16,7 @@ int main() {
   vector<Patient> data = loadFromFile();
   auto commands = initializeCommands(data);
 
-  cout << "\nWelcome to CMD Banking System! Type 'help' for commands\n";
+  cout << "\nWelcome to CMD Banking System! Type '?' for commands\n";
 
   string cmd;
   while (true) {
