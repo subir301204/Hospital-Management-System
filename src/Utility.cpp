@@ -104,7 +104,7 @@ bool checkPassword() {
   return (input == stored);
 }
 
-// Function to delete a spacific record
+// Function to delete a specific record
 void deleteRecord(const vector<Patient> &data, const int lineIndex) {
   ifstream fin("data/data.txt");
   if (!fin) {
@@ -119,7 +119,7 @@ void deleteRecord(const vector<Patient> &data, const int lineIndex) {
     lines.push_back(line);
   fin.close();
 
-  // Remove the spacific line
+  // Remove the specific line
   lines.erase(lines.begin() + lineIndex);
 
   ofstream fout("data/data.txt");

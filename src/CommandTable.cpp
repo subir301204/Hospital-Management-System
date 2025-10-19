@@ -73,13 +73,13 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
       cout << " exit      - Exit the program\n";
     }
     else {
-      cout << "\n=======Available Commands In Advaced Mode=======\n";
+      cout << "\n=======Available Commands In Advanced Mode=======\n";
       cout << " create    - Create a new account\n";
       cout << " details   - Show Patient details\n";
       cout << " cls       - Clears the screen\n";
       cout << " list      - List of details of all patients\n";
       cout << " switch    - Switch between Normal and Advanced mode\n";
-      cout << " delete    - Delete a spacific Patient record\n";
+      cout << " delete    - Delete a specific Patient record\n";
       cout << " ?         - Show all available commands\n";
       cout << " exit      - Exit the program\n";
     }
