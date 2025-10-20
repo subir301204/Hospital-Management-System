@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Patient::Patient(int pID, string admissionDate, string nameOfPatient) : pID(pID), admissionDate(admissionDate), nameOfPatient(nameOfPatient) {}
+Patient::Patient(int pID, string nameOfPatient, string admissionDate) : pID(pID), nameOfPatient(nameOfPatient), admissionDate(admissionDate) {}
 
 
 int Patient::getID() const {

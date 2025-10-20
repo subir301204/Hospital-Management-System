@@ -22,39 +22,67 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
     cout << "\n=======Creating An Account=======\n";
     int id;
     string admissionDate, nameOfPatient;
-    cout << "Enter Patient ID: ";
-    cin >> id;
-    // Add input validation similar to Utility.cpp
-    if (cin.fail()) {
-      cin.clear();
-      cin.ignore(numeric_limits<streamsize>::max(), '\n');
-      cout << "Invalid input. Please enter a number for the ID.\n";
-      return;
-    }
+    
+    // Get the pID input from the user
+    while (true) {
+      cout << "Enter Patient ID: ";
+      cin >> id;
 
-    int index = searchPatient(data, id);
-    if (index == -1) {
-      while (true) {
-        cout << "Enter Admission Date (DD-MM-YYYY): ";
-        cin >> admissionDate;
-
+      // Check for cin fail
+      if (cin.fail()) {
+        cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-        if (checkDateFormat(admissionDate))
-          break;
-        else
-          cerr << "\nError: Invalid date. Try again...\n\n";
+        cerr << "\nError: Please enter a numbers for patient ID. Try again...\n\n";
+        continue;
       }
 
-      cout << "Enter Patient Name: ";
-      getline(cin, nameOfPatient);
-      data.push_back(Patient(id, admissionDate, nameOfPatient));
-
-      saveToFile(data);
-      cout << "\nData saved.\n";
+      // Check for duplicate Patient IDs
+      if (searchPatient(data, id) != -1) {
+        cerr << "\nError: Patient already exist with the same ID. Try again...\n\n";
+        continue;
+      }
+      
+      // End the loop
+      break;
     }
-    else
-      cout << "\nAccount already exists!\n";
+    cin.ignore();   // Clean leftover newline buffer
+
+    // Get the Patient name from the user
+    while (true) {
+      cout << "Enter Patient name: ";
+      getline(cin, nameOfPatient);
+
+      // Check if the entered name is empty or not
+      if (nameOfPatient.empty()){
+        cerr << "\nError: Patient name cannot be empty. Try again...\n\n";
+        continue;
+      }
+
+      // End the loop
+      break;
+    }
+
+    // Get Patient's admission date from the user
+    while (true) {
+      cout << "Enter Admission Date (DD-MM-YYYY): ";
+      cin >> admissionDate;
+
+      // Check if the admission date is valid or not
+      if (!checkDateFormat(admissionDate)) {
+        cerr << "\nError: Invalid Admission Date. Try again...\n\n";
+        continue;
+      }
+
+      // End the loop
+      break;
+    }
+
+    // Push details to the "data/data.txt" file
+    data.push_back(Patient(id, nameOfPatient, admissionDate));
+
+    // Save the file
+    saveToFile(data);
+    cout << "\nData saved.\n";
   };
 
   commands["details"] = [&]() {

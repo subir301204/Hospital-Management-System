@@ -14,7 +14,7 @@ class Patient {
 
   public:
     // constructor
-    Patient(int pID, string admissionDate, string nameOfPatient);
+    Patient(int pID, string nameOfPatient, string admissionDate);
 
     // getter functions
     int getID() const;

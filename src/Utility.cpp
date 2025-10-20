@@ -20,7 +20,7 @@ void saveToFile(const vector<Patient> &data) {
   cout << "\nSaving new records...\n";
 
   for (auto &da : data)
-    fout << da.getID() << " " << da.getAdmissionDate() << " " << da.getName() << "\n";
+    fout << da.getID() << "  " << da.getName() << "  " << da.getAdmissionDate() << "\n";
   fout.close();
 }
 
@@ -116,7 +116,7 @@ void deleteRecord(vector<Patient> &data, const int lineIndex) {
   }
 
   for (auto &d : data)
-    fout << d.getID() << d.getAdmissionDate() << d.getName() << '\n';
+    fout << d.getID() << "  " << d.getName() << "  " << d.getAdmissionDate() << '\n';
   fout.close();
 
   cout << "\nRecord deleted successfully.\n";
