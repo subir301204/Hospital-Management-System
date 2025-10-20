@@ -136,7 +136,7 @@ bool checkDateFormat(const string &date) {
   int year = stoi(date.substr(6, 4));
 
   // Basic month and day range check
-  if (month < 1 || month > 12 || day < 1)
+  if (month < 1 || month > 12 || day < 1 || year > 2025 || year < 1900)
     return false;
 
   // Days in each month
