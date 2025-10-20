@@ -38,6 +38,6 @@ bool checkPassword();
 void deleteRecord(vector<Patient> &data, const int lineIndex);
 
 // Function to check admission date format validity
-bool checkDateFormat(string date);
+bool checkDateFormat(const string &date);
 
 #endif

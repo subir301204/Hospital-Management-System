@@ -43,7 +43,7 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
         if (checkDateFormat(admissionDate))
           break;
         else
-          cerr << "\nError: Invalid date format. Try again...\n\n";
+          cerr << "\nError: Invalid date. Try again...\n\n";
       }
 
       cout << "Enter Patient Name: ";

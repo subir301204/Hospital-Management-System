@@ -123,11 +123,32 @@ void deleteRecord(vector<Patient> &data, const int lineIndex) {
 }
 
 // Function to check admission date format validity
-bool checkDateFormat(string date) {
+bool checkDateFormat(const string &date) {
+  // Check the Date format
   regex dateFormat(R"(^\d{2}-\d{2}-\d{4}$)");   // Format: DD-MM-YYYY
 
-  if (regex_match(date, dateFormat))
-    return true;
-  else
+  if (!regex_match(date, dateFormat))
     return false;
+
+  // Extracting day, month, year
+  int day = stoi(date.substr(0, 2));
+  int month = stoi(date.substr(3, 2));
+  int year = stoi(date.substr(6, 4));
+
+  // Basic month and day range check
+  if (month < 1 || month > 12 || day < 1)
+    return false;
+
+  // Days in each month
+  int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+  // Leap year check
+  if ((year % 4 == 0 && year % 100 == 0) || (year % 400 == 0))
+    daysInMonth[1] = 29;
+  
+  // Final day check
+  if (day > daysInMonth[month - 1])
+    return false;
+  
+  return true;
 }
