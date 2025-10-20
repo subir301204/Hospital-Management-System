@@ -29,8 +29,8 @@ vector<Patient> loadFromFile() {
   ifstream fin("data/data.txt");
   int id;
   string admissionDate, nameOfPatient;
-  while (fin >> id >> admissionDate >> nameOfPatient)
-    data.push_back(Patient(id, admissionDate, nameOfPatient));
+  while (fin >> id >> nameOfPatient >> admissionDate)
+    data.push_back(Patient(id, nameOfPatient, admissionDate));
   fin.close();
   return data;
 }
@@ -59,7 +59,7 @@ int searchPatient(vector<Patient> &data) {
     }
   }
 
-  for (int i = 0; i <data.size(); i++)
+  for (int i = 0; i < data.size(); i++)
     if (data[i].getID() == id)
       return i;
   
@@ -107,6 +107,12 @@ bool checkPassword() {
 
 // Function to delete a specific record
 void deleteRecord(vector<Patient> &data, const int lineIndex) {
+  // Check valid line index
+  if (lineIndex < 0 || lineIndex >= data.size()) {
+    cerr << "\nError: Invalid record index...\n\n";
+    return;
+  }
+
   data.erase(data.begin() + lineIndex);
 
   ofstream fout("data/data.txt");
@@ -151,4 +157,11 @@ bool checkDateFormat(const string &date) {
     return false;
   
   return true;
+}
+
+// Function to check Patient name validity
+bool checkName(const string &name) {
+  // Allowing only alphabets and spaces between them
+  regex namePattern(R"(^[A-Za-z ]+$)");
+  return (regex_match(name, namePattern));
 }

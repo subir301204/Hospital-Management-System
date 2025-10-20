@@ -58,6 +58,11 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
         continue;
       }
 
+      if (!checkName(nameOfPatient)) {
+        cerr << "\nError: Invalid Patient name, Names are only accepted. Try again...\n\n";
+        continue;
+      }
+
       // End the loop
       break;
     }

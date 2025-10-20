@@ -40,4 +40,7 @@ void deleteRecord(vector<Patient> &data, const int lineIndex);
 // Function to check admission date format validity
 bool checkDateFormat(const string &date);
 
+// Function to check Patient name validity
+bool checkName(const string &name);
+
 #endif
