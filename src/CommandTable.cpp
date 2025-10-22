@@ -28,7 +28,6 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
       cout << "Enter Patient ID: ";
       cin >> id;
 
-      // Check for cin fail
       if (cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -36,13 +35,16 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
         continue;
       }
 
-      // Check for duplicate Patient IDs
+      if (!checkPatientID(id)) {
+        cout << "\nError: Invalid Patient ID. The ID should be of 7 digits. Try again...\n\n";
+        continue;
+      }
+
       if (searchPatient(data, id) != -1) {
         cerr << "\nError: Patient already exist with the same ID. Try again...\n\n";
         continue;
       }
       
-      // End the loop
       break;
     }
     cin.ignore();   // Clean leftover newline buffer

@@ -12,147 +12,155 @@ using namespace std;
 
 // Save all patients to file
 void saveToFile(const vector<Patient> &data) {
-    ofstream fout("data/data.txt");
-    if (!fout) {
-        cerr << "Error: Cannot open file 'data/data.txt' for writing.\n";
-        return;
-    }
+  ofstream fout("data/data.txt");
+  if (!fout) {
+    cerr << "Error: Cannot open file 'data/data.txt' for writing.\n";
+    return;
+  }
 
-    cout << "\nSaving new records...\n";
-    for (const auto &d : data)
-        fout << d.getID() << "  " << d.getName() << "  " << d.getAdmissionDate() << "\n";
+  cout << "\nSaving new records...\n";
+  for (const auto &d : data)
+    fout << d.getID() << "  " << d.getName() << "  " << d.getAdmissionDate() << "\n";
 }
 
 // Load all patients from file
 vector<Patient> loadFromFile() {
-    vector<Patient> data;
-    ifstream fin("data/data.txt");
-    if (!fin) {
-        cerr << "Error: Cannot open file for reading.\n";
-        return data;
-    }
-
-    string line;
-    while (getline(fin, line)) {
-        if (line.empty()) continue;
-
-        stringstream ss(line);
-        int id;
-        ss >> id;
-
-        string nameWithDate;
-        getline(ss, nameWithDate);  // rest of line = name + date
-
-        // Trim leading spaces
-        while (!nameWithDate.empty() && nameWithDate.front() == ' ')
-            nameWithDate.erase(0, 1);
-
-        // Last space separates date from name
-        size_t pos = nameWithDate.find_last_of(' ');
-        if (pos == string::npos) continue; // malformed line
-
-        string name = nameWithDate.substr(0, pos);
-        string date = nameWithDate.substr(pos + 1);
-
-        data.push_back(Patient(id, name, date));
-    }
-
+  vector<Patient> data;
+  ifstream fin("data/data.txt");
+  if (!fin) {
+    cerr << "Error: Cannot open file for reading.\n";
     return data;
+  }
+
+  string line;
+  while (getline(fin, line)) {
+    if (line.empty()) continue;
+
+    stringstream ss(line);
+    int id;
+    ss >> id;
+
+    string nameWithDate;
+    getline(ss, nameWithDate);  // rest of line = name + date
+
+    // Trim leading spaces
+    while (!nameWithDate.empty() && nameWithDate.front() == ' ')
+      nameWithDate.erase(0, 1);
+
+    // Last space separates date from name
+    size_t pos = nameWithDate.find_last_of(' ');
+    if (pos == string::npos) continue; // malformed line
+
+    string name = nameWithDate.substr(0, pos);
+    string date = nameWithDate.substr(pos + 1);
+
+    data.push_back(Patient(id, name, date));
+  }
+
+  return data;
 }
 
 // Search patient by ID, return index
 int searchPatient(const vector<Patient> &data, int id) {
-    for (int i = 0; i < data.size(); i++)
-        if (data[i].getID() == id) return i;
-    return -1;
+  for (int i = 0; i < data.size(); i++)
+    if (data[i].getID() == id) return i;
+  return -1;
 }
 
 // Search patient by user input
 int searchPatient(vector<Patient> &data) {
-    int id;
-    while (true) {
-        cout << "Enter the Patient Id: ";
-        if (cin >> id) break;
+  int id;
+  while (true) {
+    cout << "Enter the Patient Id: ";
+    if (cin >> id) break;
 
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cerr << "Invalid input. Try again...\n";
-    }
+    cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cerr << "Invalid input. Try again...\n";
+  }
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    for (int i = 0; i < data.size(); i++)
-        if (data[i].getID() == id) return i;
+  for (int i = 0; i < data.size(); i++)
+    if (data[i].getID() == id) return i;
 
-    return -1;
+  return -1;
 }
 
 // Hidden input for password
 string getHiddenInput() {
-    string input;
-    char ch;
-    while ((ch = _getch()) != '\r') {
-        if (ch == '\b' && !input.empty()) {
-            input.pop_back();
-            cout << "\b \b";
-        } else if (ch != '\b') {
-            input.push_back(ch);
-            cout << '*';
-        }
+  string input;
+  char ch;
+  while ((ch = _getch()) != '\r') {
+    if (ch == '\b' && !input.empty()) {
+      input.pop_back();
+      cout << "\b \b";
+    } else if (ch != '\b') {
+      input.push_back(ch);
+      cout << '*';
     }
-    cout << endl;
-    return input;
+  }
+  cout << endl;
+  return input;
 }
 
 // Check password
 bool checkPassword() {
-    ifstream fin("data/password.txt");
-    if (!fin) {
-        cerr << "No password file found.\n";
-        return false;
-    }
+  ifstream fin("data/password.txt");
+  if (!fin) {
+    cerr << "No password file found.\n";
+    return false;
+  }
 
-    string stored;
-    getline(fin, stored);
-    fin.close();
+  string stored;
+  getline(fin, stored);
+  fin.close();
 
-    cout << "Enter admin password: ";
-    string input = getHiddenInput();
-    return input == stored;
+  cout << "Enter admin password: ";
+  string input = getHiddenInput();
+  return input == stored;
 }
 
 // Delete record
 void deleteRecord(vector<Patient> &data, const int lineIndex) {
-    if (lineIndex < 0 || lineIndex >= data.size()) {
-        cerr << "\nError: Invalid record index!\n";
-        return;
-    }
+  if (lineIndex < 0 || lineIndex >= data.size()) {
+    cerr << "\nError: Invalid record index!\n";
+    return;
+  }
 
-    data.erase(data.begin() + lineIndex);
-    saveToFile(data);
-    cout << "\nRecord deleted successfully.\n";
+  data.erase(data.begin() + lineIndex);
+  saveToFile(data);
+  cout << "\nRecord deleted successfully.\n";
 }
 
 // Check date format and validity
 bool checkDateFormat(const string &date) {
-    regex dateFormat(R"(^\d{2}-\d{2}-\d{4}$)");
-    if (!regex_match(date, dateFormat)) return false;
+  regex dateFormat(R"(^\d{2}-\d{2}-\d{4}$)");
+  if (!regex_match(date, dateFormat)) 
+    return false;
 
-    int day = stoi(date.substr(0, 2));
-    int month = stoi(date.substr(3, 2));
-    int year = stoi(date.substr(6, 4));
+  int day = stoi(date.substr(0, 2));
+  int month = stoi(date.substr(3, 2));
+  int year = stoi(date.substr(6, 4));
 
-    if (month < 1 || month > 12 || day < 1 || year < 1900 || year > 2025)
-        return false;
+  if (month < 1 || month > 12 || day < 1 || year < 1900 || year > 2025)
+    return false;
 
-    int daysInMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
-    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
-        daysInMonth[1] = 29;
+  int daysInMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+  if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+    daysInMonth[1] = 29;
 
-    return day <= daysInMonth[month - 1];
+  return day <= daysInMonth[month - 1];
 }
 
 // Check name validity (alphabets + spaces)
 bool checkName(const string &name) {
-    regex namePattern(R"(^[A-Za-z ]+$)");
-    return regex_match(name, namePattern);
+  regex namePattern(R"(^[A-Za-z ]+$)");
+  return regex_match(name, namePattern);
+}
+
+// Function to check Patient ID validity
+bool checkPatientID(const int &pID) {
+  if (pID < 999999 || pID > 10000000)
+    return false;
+  return true;
 }

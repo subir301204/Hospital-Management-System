@@ -43,4 +43,7 @@ bool checkDateFormat(const string &date);
 // Function to check Patient name validity
 bool checkName(const string &name);
 
+// Function to check patient id validity
+bool checkPatientID(const int &pID);
+
 #endif
