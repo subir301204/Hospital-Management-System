@@ -9,17 +9,25 @@ using namespace std;
 class Patient {
   private:
     int pID;
-    string admissionDate;
     string nameOfPatient;
+    int age;
+    string sex;
+    string admissionDate;
+    string wordNo;
+    string underDoctor;
 
   public:
     // constructor
-    Patient(int pID, string nameOfPatient, string admissionDate);
+    Patient(int pID, string nameOfPatient, int age, string sex, string admissionDate, string wordNo, string underDoctor);
 
     // getter functions
     int getID() const;
-    string getAdmissionDate() const;
     string getName() const;
+    int getAge() const;
+    string getSex() const;
+    string getAdmissionDate() const;
+    string getWordNo() const;
+    string getUnderDoctor() const;
 
     // display functions
     void displayPatientDetails() const;

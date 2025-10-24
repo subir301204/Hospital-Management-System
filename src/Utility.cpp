@@ -20,7 +20,7 @@ void saveToFile(const vector<Patient> &data) {
 
   cout << "\nSaving new records...\n";
   for (const auto &d : data)
-    fout << d.getID() << "  " << d.getName() << "  " << d.getAdmissionDate() << "\n";
+    fout << d.getID() << "  " << "  " << d.getName() << "  " << d.getAge() << "  " << d.getSex() << "  " << d.getAdmissionDate() << "  " << d.getWordNo() << "  " << d.getUnderDoctor() << "\n";
 }
 
 // Load all patients from file
