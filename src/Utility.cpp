@@ -185,3 +185,7 @@ bool isValidAge(const int &age) {
     return false;
   return true;
 }
+
+bool isValidSex(const string &sex) {
+  return (sex == "M" || sex == "F" || sex == "O");
+}
