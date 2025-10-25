@@ -20,8 +20,8 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
   // Commands
   commands["create"] = [&]() {
     cout << "\n=======Creating An Account=======\n";
-    int id;
-    string admissionDate, nameOfPatient;
+    int id, age;
+    string admissionDate, nameOfPatient, sex, wordNo, underDoctor;
     
     // Get the pID input from the user
     while (true) {
@@ -69,6 +69,40 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
       break;
     }
 
+    // Get age of the Patient from the user
+    while (true) {
+      cout << "Enter Patient age: ";
+      cin >> age;
+
+      if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "\nError: Please enter a numbers for patient ID. Try again...\n\n";
+        continue;
+      }
+
+      if (!isValidAge(age)) {
+        cerr << "\nError: Invalid age. The age can't be negative. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+    cin.ignore();
+
+    // Get Patient's sex from the user
+    while (true) {
+      cout << "Enter Patient sex: ";
+      cin >> sex;
+
+      if (!isValidSex(sex)) {
+        cerr << "\nnError: Invalid sex. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+
     // Get Patient's admission date from the user
     while (true) {
       cout << "Enter Admission Date (DD-MM-YYYY): ";
@@ -84,8 +118,37 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
       break;
     }
 
+    // Get Patient's word no from the user
+    while (true) {
+      cout << "Enter Word No: ";
+      cin >> wordNo;
+
+      if (!isValidWord(wordNo)) {
+        cerr << "\nError: Invalid Word NO. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+    cin.ignore();
+
+    // Get the doctor name under which the patient is
+    while (true) {
+      cout << "Enter Doctor name: ";
+      getline(cin, underDoctor);
+
+      // Check if the entered name is empty or not
+      if (nameOfPatient.empty()){
+        cerr << "\nError: Doctor name cannot be empty. Try again...\n\n";
+        continue;
+      }
+
+      // End the loop
+      break;
+    }
+
     // Push details to the "data/data.txt" file
-    data.push_back(Patient(id, nameOfPatient, admissionDate));
+    data.push_back(Patient(id, nameOfPatient, age, sex, admissionDate, wordNo, underDoctor));
 
     // Save the file
     saveToFile(data);
