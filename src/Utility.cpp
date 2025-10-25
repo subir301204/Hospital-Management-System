@@ -121,9 +121,27 @@ string getHiddenInput() {
 // Check password
 bool checkPassword() {
   const string passwordFile = "data/password.txt";
+
   ifstream fin(passwordFile);
 
   if (!fin) {
+    cerr << "\nError: Cannot open the password file!!!\n\n";
+    return false;
+  }
+
+  fin.seekg(0, ios::end);
+  if (fin.tellg() == 0) {
+    fin.close();
+    cerr << "\nError: File is empty. Deleting...\n\n";
+    if (remove(passwordFile.c_str()) == 0)
+      cout << "\nFile deleted successfully!\n\n";
+    else
+      cerr << "\nError: Could not delete file.\n";
+  }
+
+  ifstream fin2(passwordFile);
+
+  if (!fin2) {
     cerr << "\nError: No admin password found!!!\n";
     cout << "\n=======Create a Password=======\n";
     cout << "Enter password: ";
@@ -144,8 +162,8 @@ bool checkPassword() {
   }
 
   string passwordStored;
-  getline(fin, passwordStored);
-  fin.close();
+  getline(fin2, passwordStored);
+  fin2.close();
 
   cout << "Enter admin password: ";
   string input = getHiddenInput();
