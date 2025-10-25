@@ -46,4 +46,7 @@ bool checkName(const string &name);
 // Function to check patient id validity
 bool checkPatientID(const int &pID);
 
+// Function to check age validity
+bool isValidAge(const int &age);
+
 #endif
