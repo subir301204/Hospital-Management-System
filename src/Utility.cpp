@@ -189,3 +189,7 @@ bool isValidAge(const int &age) {
 bool isValidSex(const string &sex) {
   return (sex == "M" || sex == "F" || sex == "O");
 }
+
+bool isValidWord(const string &wordNo) {
+  return (wordNo == "W1" || wordNo == "W2" || wordNo == "W3" || wordNo == "W4" || wordNo == "W5");
+}
