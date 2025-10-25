@@ -179,3 +179,9 @@ bool checkPatientID(const int &pID) {
     return false;
   return true;
 }
+
+bool isValidAge(const int &age) {
+  if (age <= 0)
+    return false;
+  return true;
+}
