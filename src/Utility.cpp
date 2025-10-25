@@ -27,36 +27,51 @@ void saveToFile(const vector<Patient> &data) {
 vector<Patient> loadFromFile() {
   vector<Patient> data;
   ifstream fin("data/data.txt");
+
   if (!fin) {
-    cerr << "Error: Cannot open file for reading.\n";
+    cerr << "\nError: Cannot open the file for reading.\n\n";
     return data;
   }
 
   string line;
   while (getline(fin, line)) {
-    if (line.empty()) continue;
-
+    if (line.empty())
+      continue;
+    
     stringstream ss(line);
     int id;
     ss >> id;
 
-    string nameWithDate;
-    getline(ss, nameWithDate);  // rest of line = name + date
+    vector<string> tokens;
+    string token;
+    while (ss >> token)
+      tokens.push_back(token);
 
-    // Trim leading spaces
-    while (!nameWithDate.empty() && nameWithDate.front() == ' ')
-      nameWithDate.erase(0, 1);
+    if (tokens.size())
+      continue;
 
-    // Last space separates date from name
-    size_t pos = nameWithDate.find_last_of(' ');
-    if (pos == string::npos) continue; // malformed line
+    string underDoctor = tokens.back();
+    tokens.pop_back();
+    string wordNo = tokens.back();
+    tokens.pop_back();
+    string admissionDate = tokens.back();
+    tokens.pop_back();
+    string sex = tokens.back();
+    tokens.pop_back();
+    int age = stoi(tokens.back());
+    tokens.pop_back();
 
-    string name = nameWithDate.substr(0, pos);
-    string date = nameWithDate.substr(pos + 1);
+    string name;
+    for (size_t i = 0; i < tokens.size(); i++) {
+      name += tokens[i];
+      if (i != tokens.size())
+        name += " ";
+    }
 
-    data.push_back(Patient(id, name, date));
+    data.emplace_back(id, name, age, sex, wordNo, underDoctor, admissionDate);
   }
 
+  fin.close();
   return data;
 }
 
