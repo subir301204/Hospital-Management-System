@@ -120,19 +120,44 @@ string getHiddenInput() {
 
 // Check password
 bool checkPassword() {
-  ifstream fin("data/password.txt");
+  const string passwordFile = "data/password.txt";
+  ifstream fin(passwordFile);
+
   if (!fin) {
-    cerr << "No password file found.\n";
-    return false;
+    cerr << "\nError: No admin password found!!!\n";
+    cout << "\n=======Create a Password=======\n";
+    cout << "Enter password: ";
+    string newPassword = getHiddenInput();
+
+    ofstream fout(passwordFile);
+
+    if (!fout) {
+      cerr << "\nError: Cannot create password file!!!\n\n";
+      return false;
+    }
+
+    fout << newPassword;
+    fout.close();
+
+    cout << "\nPassword saved successfully! You won't be asked again.\n";
+    return true;
   }
 
-  string stored;
-  getline(fin, stored);
+  string passwordStored;
+  getline(fin, passwordStored);
   fin.close();
 
   cout << "Enter admin password: ";
   string input = getHiddenInput();
-  return input == stored;
+
+  if (input == passwordStored) {
+    cout << "\nAccess granted!\n";
+    return true;
+  }
+  else {
+    cerr << "\nAccess denied! Wrong password.\n";
+    return false;
+  }
 }
 
 // Delete record
