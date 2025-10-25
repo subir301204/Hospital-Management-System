@@ -49,4 +49,10 @@ bool checkPatientID(const int &pID);
 // Function to check age validity
 bool isValidAge(const int &age);
 
+// Function to check sex validity of the Patient
+bool isValidSex(const string &sex);
+
+// Function to check wordNo validity of the patient
+bool isValidWord(const string &wordNo);
+
 #endif
