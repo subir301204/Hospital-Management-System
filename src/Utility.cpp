@@ -138,6 +138,8 @@ bool checkPassword() {
     else
       cerr << "\nError: Could not delete file.\n";
   }
+  else 
+    fin.close();
 
   ifstream fin2(passwordFile);
 
