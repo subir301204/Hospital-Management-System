@@ -101,45 +101,9 @@ int searchPatient(vector<Patient> &data) {
   return -1;
 }
 
-// // Hidden input for password
-// string getHiddenInput() {
-//   string input;
-//   char ch;
-//   while ((ch = getch_cross()) != '\r') {
-//     if (ch == '\b' && !input.empty()) {
-//       input.pop_back();
-//       cout << "\b \b";
-//     } else if (ch != '\b') {
-//       input.push_back(ch);
-//       cout << '*';
-//     }
-//   }
-//   cout << endl;
-//   return input;
-// }
-
 // Check password
 bool checkPassword() {
   const string passwordFile = "data/password.txt";
-
-  ifstream fin(passwordFile);
-
-  if (!fin) {
-    cerr << "\nError: Cannot open the password file!!!\n\n";
-    return false;
-  }
-
-  fin.seekg(0, ios::end);
-  if (fin.tellg() == 0) {
-    fin.close();
-    cerr << "\nError: File is empty. Deleting...\n\n";
-    if (remove(passwordFile.c_str()) == 0)
-      cout << "\nFile deleted successfully!\n\n";
-    else
-      cerr << "\nError: Could not delete file.\n";
-  }
-  else 
-    fin.close();
 
   ifstream fin2(passwordFile);
 
@@ -161,10 +125,36 @@ bool checkPassword() {
     cout << "\nPassword saved successfully! You won't be asked again.\n";
     return true;
   }
+  else
+    fin2.close();
+
+  ifstream fin1(passwordFile);
+
+  if (!fin1) {
+    cerr << "\nError: Cannot open the password file!!!\n\n";
+    return false;
+  }
+
+  fin1.seekg(0, ios::end);
+  if (fin1.tellg() == 0) {
+    fin1.close();
+    cerr << "\nError: File is empty. Deleting...\n\n";
+    if (remove(passwordFile.c_str()) == 0)
+      cout << "\nFile deleted successfully! Try again with \"switch\" command.\n\n";
+    else
+      cerr << "\nError: Could not delete file.\n";
+  }
+
+  ifstream fin(passwordFile);
+
+  if (!fin) {
+    cerr << "\nError: Cannot open the password file!!!\n\n";
+    return false;
+  }
 
   string passwordStored;
-  getline(fin2, passwordStored);
-  fin2.close();
+  getline(fin, passwordStored);
+  fin.close();
 
   string input = getHiddenInput();
 
