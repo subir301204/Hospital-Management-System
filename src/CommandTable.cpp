@@ -1,5 +1,6 @@
 #include "Patient.h"
 #include "Utility.h"
+#include "Getch_cross.h"
 #include <iostream>
 #include <map>
 #include <functional>
@@ -197,7 +198,7 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
   };
 
   commands["cls"] = [&]() {
-    system("cls");
+    system("clear");
   };
 
   commands["list"] = [&]() {
@@ -206,7 +207,7 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
 
       if (!file) {
         cout << "Unable to open the file!!!" << endl;
-        return 1;
+        return;
       }
 
       cout << "\n=======List Of Patients=======\n";

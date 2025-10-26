@@ -2,11 +2,11 @@
 #define UTILITY_H
 
 #include "Patient.h"
+#include "Getch_cross.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
-#include <conio.h>
 
 using namespace std;
 
@@ -29,7 +29,7 @@ int searchPatient(const vector<Patient> &data, int id);
 int searchPatient(vector<Patient> &data);
 
 // Function to get hidden inputs
-string getHiddenInput();
+// string getHiddenInput();
 
 // Function to check password validity
 bool checkPassword();

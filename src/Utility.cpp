@@ -1,9 +1,9 @@
 #include "Patient.h"
+#include "Getch_cross.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <limits>
-#include <conio.h>
 #include <regex>
 #include <sstream>
 #include <string>
@@ -101,22 +101,22 @@ int searchPatient(vector<Patient> &data) {
   return -1;
 }
 
-// Hidden input for password
-string getHiddenInput() {
-  string input;
-  char ch;
-  while ((ch = _getch()) != '\r') {
-    if (ch == '\b' && !input.empty()) {
-      input.pop_back();
-      cout << "\b \b";
-    } else if (ch != '\b') {
-      input.push_back(ch);
-      cout << '*';
-    }
-  }
-  cout << endl;
-  return input;
-}
+// // Hidden input for password
+// string getHiddenInput() {
+//   string input;
+//   char ch;
+//   while ((ch = getch_cross()) != '\r') {
+//     if (ch == '\b' && !input.empty()) {
+//       input.pop_back();
+//       cout << "\b \b";
+//     } else if (ch != '\b') {
+//       input.push_back(ch);
+//       cout << '*';
+//     }
+//   }
+//   cout << endl;
+//   return input;
+// }
 
 // Check password
 bool checkPassword() {
@@ -146,7 +146,6 @@ bool checkPassword() {
   if (!fin2) {
     cerr << "\nError: No admin password found!!!\n";
     cout << "\n=======Create a Password=======\n";
-    cout << "Enter password: ";
     string newPassword = getHiddenInput();
 
     ofstream fout(passwordFile);
@@ -167,7 +166,6 @@ bool checkPassword() {
   getline(fin2, passwordStored);
   fin2.close();
 
-  cout << "Enter admin password: ";
   string input = getHiddenInput();
 
   if (input == passwordStored) {
