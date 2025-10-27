@@ -18,7 +18,7 @@ using namespace std;
 map<string, function<void()>> initializeCommands(vector<Patient> &data) {
   map<string, function<void()>> commands;
 
-  // Commands
+  // All UNIVERSAL Commands
   commands["create"] = [&]() {
     cout << "\n=======Creating An Account=======\n";
     int id, age;
@@ -156,19 +156,6 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
     cout << "\nData saved.\n";
   };
 
-  commands["details"] = [&]() {
-    if (inAdvancedMode) {
-      cout << "\n=======Patient Details=======\n";
-      int index = searchPatient(data);
-      if (index != -1)
-        data[index].displayPatientDetails();
-      else
-        cout << "Patient not found!!!";
-    }
-    else
-      cout << "\n##########Switch to Advanced Mode for this command##########\n";
-  };
-
   commands["?"] = [&]() {
     if (!inAdvancedMode) {
       cout << "\n=======Available Commands=======\n";
@@ -197,8 +184,43 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
     exit(0);
   };
 
+  commands["switch"] = [&]() {
+    if (inAdvancedMode) {
+      cout << "\n----------------------------\n\n";
+      cout << "Switching to NORMAL Mode...\n";
+      cout << "\n----------------------------\n";
+
+      inAdvancedMode = false;
+    }
+    else {
+      if (checkPassword()) {
+        cout << "\n----------------------------\n\n";
+        cout << "Switching to ADVANCED Mode...\n";
+        cout << "\n----------------------------\n";
+
+        inAdvancedMode = true;
+      }
+      else
+        cout << "\n##########Access Denied##########\n";
+    }
+  };
+
   commands["cls"] = [&]() {
     system("clear");
+  };
+
+  // All ADVANCED Mode commands
+  commands["details"] = [&]() {
+    if (inAdvancedMode) {
+      cout << "\n=======Patient Details=======\n";
+      int index = searchPatient(data);
+      if (index != -1)
+        data[index].displayPatientDetails();
+      else
+        cout << "Patient not found!!!";
+    }
+    else
+      cout << "\n##########Switch to Advanced Mode for this command##########\n";
   };
 
   commands["list"] = [&]() {
@@ -221,29 +243,6 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
     else
       cout << "\n##########Switch to Advanced Mode for this command##########\n";
   };
-
-  commands["switch"] = [&]() {
-    if (inAdvancedMode) {
-      cout << "\n----------------------------\n\n";
-      cout << "Switching to NORMAL Mode...\n";
-      cout << "\n----------------------------\n";
-
-      inAdvancedMode = false;
-    }
-    else {
-      if (checkPassword()) {
-        cout << "\n----------------------------\n\n";
-        cout << "Switching to ADVANCED Mode...\n";
-        cout << "\n----------------------------\n";
-
-        inAdvancedMode = true;
-      }
-      else
-        cout << "\n##########Access Denied##########\n";
-    }
-  };
-
-  // Advanced commands
 
   commands["delete"] = [&]() {
     if (inAdvancedMode) {
