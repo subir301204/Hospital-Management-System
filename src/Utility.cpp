@@ -87,16 +87,18 @@ int searchPatient(vector<Patient> &data) {
   int id;
   while (true) {
     cout << "Enter the Patient Id: ";
-    if (cin >> id) break;
+    if (cin >> id) 
+      break;
 
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cerr << "Invalid input. Try again...\n";
   }
-  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  // cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
   for (int i = 0; i < data.size(); i++)
-    if (data[i].getID() == id) return i;
+    if (data[i].getID() == id)
+      return i;
 
   return -1;
 }
