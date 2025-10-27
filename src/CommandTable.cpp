@@ -159,22 +159,23 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
   commands["?"] = [&]() {
     if (!inAdvancedMode) {
       cout << "\n=======Available Commands=======\n";
-      cout << " create    - Create a new account\n";
-      cout << " cls       - Clears the screen\n";
-      cout << " switch    - Switch between Normal and Advanced mode\n";
-      cout << " ?         - Show all available commands\n";
-      cout << " exit      - Exit the program\n";
+      cout << " create            - Create a new account\n";
+      cout << " cls               - Clears the screen\n";
+      cout << " switch            - Switch between Normal and Advanced mode\n";
+      cout << " ?                 - Show all available commands\n";
+      cout << " exit              - Exit the program\n";
     }
     else {
       cout << "\n=======Available Commands In Advanced Mode=======\n";
-      cout << " create    - Create a new account\n";
-      cout << " details   - Show Patient details\n";
-      cout << " cls       - Clears the screen\n";
-      cout << " list      - List of details of all patients\n";
-      cout << " switch    - Switch between Normal and Advanced mode\n";
-      cout << " delete    - Delete a specific Patient record\n";
-      cout << " ?         - Show all available commands\n";
-      cout << " exit      - Exit the program\n";
+      cout << " create            - Create a new account\n";
+      cout << " details           - Show Patient details\n";
+      cout << " cls               - Clears the screen\n";
+      cout << " list              - List of details of all patients\n";
+      cout << " switch            - Switch between Normal and Advanced mode\n";
+      cout << " delete            - Delete a specific Patient record\n";
+      cout << " changepassword    - Change the admin password\n";
+      cout << " ?                 - Show all available commands\n";
+      cout << " exit              - Exit the program\n";
     }
   };
 
@@ -251,6 +252,14 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
     }
     else
       cout << "\n##########Switch to Advanced Mode for this command##########\n";
+  };
+
+  // Command to change the password 
+  commands["changepassword"] = [&]() {
+    if (inAdvancedMode)
+      changePassword();
+    else
+      cerr << "\n##########Switch to Advanced Mode for this command##########\n";
   };
           
   return commands;

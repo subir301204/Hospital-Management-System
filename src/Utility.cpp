@@ -112,7 +112,7 @@ bool checkPassword() {
   if (!fin2) {
     cerr << "\nError: No admin password found!!!\n";
     cout << "\n=======Create a Password=======\n";
-    string newPassword = getHiddenInput();
+    string newPassword = getHiddenInput("Enter admin password: ");
 
     ofstream fout(passwordFile);
 
@@ -158,7 +158,7 @@ bool checkPassword() {
   getline(fin, passwordStored);
   fin.close();
 
-  string input = getHiddenInput();
+  string input = getHiddenInput("Enter admin password: ");
 
   if (input == passwordStored) {
     cout << "\nAccess granted!\n";
@@ -227,4 +227,28 @@ bool isValidSex(const string &sex) {
 
 bool isValidWord(const string &wordNo) {
   return (wordNo == "W1" || wordNo == "W2" || wordNo == "W3" || wordNo == "W4" || wordNo == "W5");
+}
+
+// Function to change the switch mode password
+void changePassword() {
+  string passwordFile = "data/password.txt";
+  cout << "\n=======Changing the password=======\n";
+  
+  if (checkPassword()) {
+    if (remove(passwordFile.c_str()) == 0) {
+      string newPassword =  getHiddenInput("\nEnter new password: ");
+
+      ofstream fout("data/password.txt");
+
+      if (!fout) {
+        cerr << "\nError: Cannot change the password!!!\n\n";
+        return;
+      }
+
+      fout << newPassword;
+      fout.close();
+
+      cout << "\nPassword changed successfully!!!\n\n";
+    }
+  }
 }

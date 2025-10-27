@@ -25,11 +25,11 @@ inline char getch_cross() {
 }
 #endif
 
-inline string getHiddenInput() {
+inline string getHiddenInput(string s) {
   string password;
   char ch;
 
-  cout << "Enter admit password: ";
+  cout << s;
   cout.flush();
 
   while (true) {

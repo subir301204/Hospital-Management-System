@@ -55,4 +55,7 @@ bool isValidSex(const string &sex);
 // Function to check wordNo validity of the patient
 bool isValidWord(const string &wordNo);
 
+// Function to change the password 
+void changePassword(); 
+
 #endif
