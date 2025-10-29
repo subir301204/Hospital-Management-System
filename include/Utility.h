@@ -110,4 +110,7 @@ bool isValidExperience(const int &experience);
 // Function to check the doctor's contactNumber validity
 bool isValidContactNumber(const string &contactNumber);
 
+// Function to check doctor's email validity
+bool isValidEmail(const string &email);
+
 #endif

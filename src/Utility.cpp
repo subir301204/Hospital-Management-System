@@ -496,6 +496,12 @@ bool isValidContactNumber(const string &contactNumber) {
   return regex_match(contactNumber, pattern);
 }
 
+// Function to check doctor's email validity
+bool isValidEmail(const string &email) {
+  regex pattern(R"(^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$)");
+  return regex_match(email, pattern);
+}
+
 // Function to get Doctor details
 void doctorDetails() {
   cout << "\n=======Details of the Doctor=======\n";
