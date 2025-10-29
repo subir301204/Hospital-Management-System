@@ -98,4 +98,7 @@ void displaySpecialization();
 // Function to check the Doctor specialization validity
 bool isValidSpecialization(const string &specialization);
 
+// Function to display available doctor qualifications
+void displayQualification();
+
 #endif

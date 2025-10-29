@@ -443,6 +443,23 @@ bool isValidSpecialization(const string &specialization) {
   return false;
 }
 
+// Function to display available doctor qualifications
+void displayQualification() {
+  cout << "\n=======Available Doctor Qualifications=======\n";
+  cout << "MBBS   - Bachelor of Medicine and Bachelor of Surgery\n";
+  cout << "MD     - Doctor of Medicine\n";
+  cout << "MS     - Master of Surgery\n";
+  cout << "DM     - Doctorate of Medicine\n";
+  cout << "MCh    - Magister Chirurgiae (Master of Surgery)\n";
+  cout << "BDS    - Bachelor of Dental Surgery\n";
+  cout << "MDS    - Master of Dental Surgery\n";
+  cout << "BVSc   - Bachelor of Veterinary Science\n";
+  cout << "PhD    - Doctor of Philosophy\n";
+  cout << "DNB    - Diplomate of National Board\n";
+  cout << "BHMS   - Bachelor of Homeopathic Medicine and Surgery\n";
+  cout << "BAMS   - Bachelor of Ayurvedic Medicine and Surgery\n";
+}
+
 // Function to get Doctor details
 void doctorDetails() {
   cout << "\n=======Details of the Doctor=======\n";
