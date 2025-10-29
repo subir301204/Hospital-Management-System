@@ -104,4 +104,7 @@ void displayQualification();
 // Function to check doctor's qualification validity
 bool isValidQualification(const string &qualification);
 
+// Function to check doctor's experience validity
+bool isValidExperience(const int &experience);
+
 #endif

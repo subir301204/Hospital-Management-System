@@ -483,6 +483,13 @@ bool isValidQualification(const string &qualification) {
   return false;
 }
 
+// Function to check doctor's experience validity
+bool isValidExperience(const int &experience) {
+  if (experience < 0)
+    return false;
+  return true;
+}
+
 // Function to get Doctor details
 void doctorDetails() {
   cout << "\n=======Details of the Doctor=======\n";
