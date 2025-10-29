@@ -10,6 +10,12 @@
 
 using namespace std;
 
+/*
+------------------------------------
+Patient Utility functions
+------------------------------------
+*/
+
 // Save all patients to file
 void saveToFile(const vector<Patient> &data) {
   ofstream fout("data/data.txt");
