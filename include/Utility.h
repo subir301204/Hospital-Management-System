@@ -116,4 +116,7 @@ bool isValidEmail(const string &email);
 // Function to check the doctor's availability
 bool isAvailable(const string &available);
 
+// Function to check doctor's appointmentCount validity
+bool isValidAppointmentCount(const int &appointmentCount);
+
 #endif

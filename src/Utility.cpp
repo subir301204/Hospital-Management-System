@@ -511,6 +511,13 @@ bool isAvailable(const string &available) {
   return false;
 }
 
+// Function to check doctor's appointmentCount validity
+bool isValidAppointmentCount(const int &appointmentCount) {
+  if (appointmentCount < 0 || appointmentCount > 11)
+    return false;
+  return true;
+}
+
 // Function to get Doctor details
 void doctorDetails() {
   cout << "\n=======Details of the Doctor=======\n";
