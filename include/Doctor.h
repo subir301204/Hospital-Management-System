@@ -30,6 +30,8 @@ class Doctor {
     string getEmail() const;
     string getAvailable() const;
     int getAppointmentCount() const;
+
+    void displayDetails() const;
 };
 
 #endif

@@ -41,3 +41,16 @@ string Doctor::getAvailable() const {
 int Doctor::getAppointmentCount() const {
   return appointmentCount;
 }
+
+void Doctor::displayDetails() const {
+  cout << "\n=======Doctor's Details=======\n";
+  cout << "Doctor's Name: " << getName() << "\n";
+  cout << "Doctor's ID: " << getID() << "\n";
+  cout << "Doctor's Specialization: " << "\n";
+  cout << "Doctor's Qualification: " << "\n";
+  cout << "Years of Experience: " << "\n";
+  cout << "Doctor's Contact Number: " << "\n";
+  cout << "Doctor's Email: " << "\n";
+  cout << "Is Doctor Available?: " << "\n";
+  cout << "Number of Appointments Doctor have: " << "\n";
+}

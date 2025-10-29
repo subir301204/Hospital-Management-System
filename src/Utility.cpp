@@ -517,8 +517,3 @@ bool isValidAppointmentCount(const int &appointmentCount) {
     return false;
   return true;
 }
-
-// Function to get Doctor details
-void doctorDetails() {
-  cout << "\n=======Details of the Doctor=======\n";
-}
