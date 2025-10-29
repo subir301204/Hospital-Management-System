@@ -490,6 +490,12 @@ bool isValidExperience(const int &experience) {
   return true;
 }
 
+// Function to check the doctor's contactNumber validity
+bool isValidContactNumber(const string &contactNumber) {
+  regex pattern(R"(^[6-9]\d{9}$)");
+  return regex_match(contactNumber, pattern);
+}
+
 // Function to get Doctor details
 void doctorDetails() {
   cout << "\n=======Details of the Doctor=======\n";

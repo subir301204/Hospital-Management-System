@@ -107,4 +107,7 @@ bool isValidQualification(const string &qualification);
 // Function to check doctor's experience validity
 bool isValidExperience(const int &experience);
 
+// Function to check the doctor's contactNumber validity
+bool isValidContactNumber(const string &contactNumber);
+
 #endif
