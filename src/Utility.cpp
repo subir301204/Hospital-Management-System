@@ -1,5 +1,6 @@
 #include "Patient.h"
 #include "Getch_cross.h"
+#include "Doctor.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -20,7 +21,7 @@ Patient Utility functions
 void saveToFile(const vector<Patient> &data) {
   ofstream fout("data/data.txt");
   if (!fout) {
-    cerr << "Error: Cannot open file 'data/data.txt' for writing.\n";
+    cerr << "\nError: Cannot open file \"data/data.txt\" for writing.\n\n";
     return;
   }
 
@@ -81,6 +82,12 @@ vector<Patient> loadFromFile() {
   return data;
 }
 
+/*
+----------------------------------------
+Patient Utility functions
+----------------------------------------
+*/
+
 // Search patient by ID, return index
 int searchPatient(const vector<Patient> &data, int id) {
   for (int i = 0; i < data.size(); i++)
@@ -100,7 +107,6 @@ int searchPatient(vector<Patient> &data) {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cerr << "Invalid input. Try again...\n";
   }
-  // cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
   for (int i = 0; i < data.size(); i++)
     if (data[i].getID() == id)
@@ -257,4 +263,165 @@ void changePassword() {
       cout << "\nPassword changed successfully!!!\n\n";
     }
   }
+}
+
+/*
+----------------------------------------------
+Doctor class utility functions
+----------------------------------------------
+*/
+
+// Function to save Doctor data to the file
+void saveToFile(const vector<Doctor> &data2) {
+  ofstream fout("data/doctor.txt");
+
+  if (!fout) {
+    cerr << "\nError: Cannot open file \"data/doctor.txt\" for writing.\n\n";
+    return;
+  }
+
+  cout << "\nSaving new records...\n";
+  for (const auto &d : data2)
+    fout << d.getID() << "  " << d.getName() << "  " << d.getSpecialization() << "  " << d.getQualification() << "  " << d.getExperience() << "  " << d.getContactNumber() << "  " << d.getEmail() << "  " << d.getAvailable() << "  " << d.getAppointmentCount() << "\n";
+}
+
+// Function to load Doctors details from the file
+vector<Doctor> loadFromFileDoctor() {
+  vector<Doctor> data2;
+  ifstream fin("data/doctor.txt");
+
+  if (!fin) {
+    cerr << "\nError: Cannot open the file for reading.\n\n";
+    return data2;
+  }
+
+  string line;
+  while (getline(fin, line)) {
+    if (line.empty())
+      continue;
+    
+    stringstream ss(line);
+    int id;
+    ss >> id;
+
+    vector<string> tokens;
+    string token;
+    while (ss >> token)
+      tokens.push_back(token);
+    
+    if (tokens.size())
+      continue;
+    
+    int appointmentCount = stoi(tokens.back());
+    tokens.pop_back();
+    string available = tokens.back();
+    tokens.pop_back();
+    string email = tokens.back();
+    tokens.pop_back();
+    string contactNumber = tokens.back();
+    tokens.pop_back();
+    int experience = stoi(tokens.back());
+    tokens.pop_back();
+    string qualification = tokens.back();
+    tokens.pop_back();
+    string specialization = tokens.back();
+    tokens.pop_back();
+
+    string name;
+    for (size_t i = 0; i < tokens.size(); i++) {
+      name += tokens[i];
+      if (i != tokens.size())
+        name += " ";
+    }
+
+    data2.emplace_back(id, name, specialization, qualification, experience, contactNumber, email, available, appointmentCount);
+  }
+
+  fin.close();
+  return data2;
+}
+
+// Function to check Doctor's pin validity
+bool checkDoctorPin(const int &dID) {
+  if (dID < 999999 || dID > 10000000)
+    return false;
+  return true;
+}
+
+// Function to search doctor without dID
+int searchDoctor(vector<Doctor> &data2) {
+  int id;
+  while (true) {
+    cout << "Enter Doctor ID: ";
+    if (cin >> id)
+      break;
+    
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cerr << "\nError: Invalid input. Try again...\n\n";
+  }
+
+  for (int i = 0; i < data2.size(); i++)
+    if (data2[i].getID() == id)
+      return i;
+  
+  return -1;
+}
+
+// Function to delete a Doctor record
+void deleteDoctor(vector<Doctor> &data2, const int lineIndex) {
+  if (lineIndex < 0 || lineIndex >= data2.size()) {
+    cerr << "\nError: Invalid record index!\n\n";
+    return;
+  }
+
+  data2.erase(data2.begin() + lineIndex);
+  saveToFile(data2);
+  cout << "\nRecord deleted successfully.\n\n";
+}
+
+// Function to search Doctor with dID
+int searchDoctor(vector<Doctor> &data2, const int &dID) {
+  for (int i = 0; i < data2.size(); i++)
+    if (data2[i].getID() == dID)
+      return i;
+  return -1;
+}
+
+// Function to check the name validity of Doctor
+bool checkDoctorName(const string &name) {
+  regex namePattern(R"(^[A-Za-z .'\-]+$)");
+  return regex_match(name, namePattern);
+}
+
+// Function to show the available specialization list
+void displaySpecialization() {
+  cout << "\n=======Available Specialization Fields=======\n";
+  cout << "Cardiologist         - Heart and blood vessels (cardiovascular system)\n";
+  cout << "Neurologist          - Brain, spinal cord, and nervous system\n";
+  cout << "Pulmonologist        - Lungs and respiratory system\n";
+  cout << "Gastroenterologist   - Digestive system and stomach-intestine issues\n";
+  cout << "Nephrologist         - Kidneys and urinary system\n";
+  cout << "Endocrinologist      - Hormones and glands (e.g., diabetes, thyroid)\n";
+  cout << "Rheumatologist       - Joints, muscles, and autoimmune diseases\n";
+  cout << "Hematologist         - Blood and blood-forming organs\n";
+  cout << "Gynecology           - Female reproductive system, pregnancy, childbirth\n";
+  cout << "Oncology             - Diagnosis and treatment of cancer\n";
+  cout << "Dermatology          - Skin, hair, and nail diseases\n";
+  cout << "Audiology            - Hearing and balance disorders\n";
+  cout << "Dentistry            - Oral and dental care\n";
+  cout << "Veterinary Medicine  - Medical care of animals\n";
+  cout << "Urology              - Urinary tract and male reproductive organs\n";
+  cout << "Pediatrics           - Health and diseases of infants and children\n";
+  cout << "Orthopedic           - Musculoskeletal system — bones, muscles, ligaments, joints\n";
+}
+
+// Function to check the Doctor specialization validity
+bool isValidSpecialization(const string &specialization) {
+  
+}
+
+// Function to get Doctor details
+void doctorDetails() {
+  cout << "\n=======Details of the Doctor=======\n";
 }

@@ -2,6 +2,7 @@
 #define UTILITY_H
 
 #include "Patient.h"
+#include "Doctor.h"
 #include "Getch_cross.h"
 #include <iostream>
 #include <fstream>
@@ -18,6 +19,9 @@ Patient Utility Functions
 
 // File handling functions
 void saveToFile(const vector<Patient> &data);
+
+// Overriding the saveToFile() function for Doctor class
+void saveToFile(const vector<Doctor> &data2);
 
 // Function to load patient details to the program from the data/data.txt file
 vector<Patient> loadFromFile();
@@ -63,5 +67,35 @@ bool isValidWord(const string &wordNo);
 
 // Function to change the password 
 void changePassword(); 
+
+/*
+-----------------------------------
+Doctor utility functions
+-----------------------------------
+*/
+
+// Function to load Doctor details from the file
+vector<Doctor> loadFromFileDoctor();
+
+// Function to check Doctor's pin validity
+bool checkDoctorPin(const int &dID);
+
+// Function to search doctor with dID
+int searchDoctor(vector<Doctor> &data2, const int &dID);
+
+// Function to search doctor without dID
+int searchDoctor(vector<Doctor> &data2);
+
+// Function to delete a Doctor record
+void deleteDoctor(vector<Doctor> &data2, const int lineIndex);
+
+// Function to check the name validity of Doctor
+bool checkDoctorName(const string &name);
+
+// Function to show the available specialization list
+void displaySpecialization();
+
+// Function to check the Doctor specialization validity
+bool isValidSpecialization(const string &specialization);
 
 #endif

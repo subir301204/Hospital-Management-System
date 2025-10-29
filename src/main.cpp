@@ -1,4 +1,5 @@
 #include "Patient.h"
+#include "Doctor.h"
 #include "Utility.h"
 #include "CommandTable.h"
 #include <iostream>
@@ -14,7 +15,8 @@ map<string, function<void() >> initializeCommands(vector<Patient> &accounts);
 // Main() function
 int main() {
   vector<Patient> data = loadFromFile();
-  auto commands = initializeCommands(data);
+  vector<Doctor> data2 = loadFromFileDoctor(); 
+  auto commands = initializeCommands(data, data2);
 
   cout << "\nWelcome to CMD Banking System! Type '?' for commands\n";
 
