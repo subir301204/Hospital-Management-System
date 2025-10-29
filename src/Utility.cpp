@@ -460,6 +460,29 @@ void displayQualification() {
   cout << "BAMS   - Bachelor of Ayurvedic Medicine and Surgery\n";
 }
 
+// Function to check doctor's qualification validity
+bool isValidQualification(const string &qualification) {
+  const vector<string> QUALIFICATION = {
+    "MBBS",
+    "MD",
+    "MS",
+    "DM",
+    "MCh",
+    "BDS",
+    "MDS",
+    "BVSc",
+    "PhD",
+    "DNB",
+    "BHMS",
+    "BAMS"
+  };
+
+  if (find(QUALIFICATION.begin(), QUALIFICATION.end(), qualification) != QUALIFICATION.end())
+    return true;
+  
+  return false;
+}
+
 // Function to get Doctor details
 void doctorDetails() {
   cout << "\n=======Details of the Doctor=======\n";
