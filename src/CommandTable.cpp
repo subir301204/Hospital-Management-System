@@ -15,7 +15,7 @@ bool inAdvancedMode = false;
 using namespace std;
 
 // Function to initialize command table
-map<string, function<void()>> initializeCommands(vector<Patient> &data) {
+map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<Doctor> &data2) {
   map<string, function<void()>> commands;
 
   // All UNIVERSAL Commands
