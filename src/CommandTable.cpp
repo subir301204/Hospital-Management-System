@@ -152,7 +152,7 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data) {
     data.push_back(Patient(id, nameOfPatient, age, sex, admissionDate, wordNo, underDoctor));
 
     // Save the file
-    saveToFile(data, "data/data.txt");
+    saveToFile(data);
     cout << "\nData saved.\n";
   };
 
