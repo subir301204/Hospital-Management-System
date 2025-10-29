@@ -10,6 +10,12 @@
 
 using namespace std;
 
+/*
+------------------------------------
+Patient Utility Functions
+------------------------------------
+*/
+
 // File handling functions
 void saveToFile(const vector<Patient> &data);
 
