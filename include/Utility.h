@@ -20,9 +20,6 @@ Patient Utility Functions
 // File handling functions
 void saveToFile(const vector<Patient> &data);
 
-// Overriding the saveToFile() function for Doctor class
-void saveToFile(const vector<Doctor> &data2);
-
 // Function to load patient details to the program from the data/data.txt file
 vector<Patient> loadFromFile();
 
@@ -73,6 +70,9 @@ void changePassword();
 Doctor utility functions
 -----------------------------------
 */
+
+// Overriding the saveToFile() function for Doctor class
+void saveToFile(const vector<Doctor> &data2);
 
 // Function to load Doctor details from the file
 vector<Doctor> loadFromFileDoctor();
