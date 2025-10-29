@@ -8,6 +8,7 @@
 #include <regex>
 #include <sstream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -418,7 +419,28 @@ void displaySpecialization() {
 
 // Function to check the Doctor specialization validity
 bool isValidSpecialization(const string &specialization) {
+  const vector<string> SPECIALIZATION = {
+    "Cardiologist",
+    "Neurologist",
+    "Pulmonologist",
+    "Gastroenterologist",
+    "Nephrologist",
+    "Endocrinologist",
+    "Rheumatologist",
+    "Hematologist",
+    "Gynecology",
+    "Oncology",
+    "Dermatology",
+    "Veterinary Medicine",
+    "Urology",
+    "Pediatrics",
+    "Orthopedic"
+  };
+
+  if (find(SPECIALIZATION.begin(), SPECIALIZATION.end(), specialization) != SPECIALIZATION.end())
+    return true;
   
+  return false;
 }
 
 // Function to get Doctor details
