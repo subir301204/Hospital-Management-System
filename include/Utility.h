@@ -113,4 +113,7 @@ bool isValidContactNumber(const string &contactNumber);
 // Function to check doctor's email validity
 bool isValidEmail(const string &email);
 
+// Function to check the doctor's availability
+bool isAvailable(const string &available);
+
 #endif

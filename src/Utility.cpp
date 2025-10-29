@@ -502,6 +502,15 @@ bool isValidEmail(const string &email) {
   return regex_match(email, pattern);
 }
 
+// Function to check the doctor's availability
+bool isAvailable(const string &available) {
+  regex pattern(R"(^[A-Z]$)");
+
+  if (regex_match(available, pattern) && (available == "YES" || available == "NO"))
+    return true;
+  return false;
+}
+
 // Function to get Doctor details
 void doctorDetails() {
   cout << "\n=======Details of the Doctor=======\n";
