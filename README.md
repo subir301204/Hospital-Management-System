@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Project Overview: Hospital Management System
 
 ## Introduction
@@ -57,5 +56,4 @@ The application uses the following files for data persistence, located in the `d
 
 - `data.txt`: Stores the records for all patients.
 - `password.txt`: Securely stores the password required to access the `Advanced Mode`.
-=======
->>>>>>> 686c243 (Revode the README.md vile)
+
