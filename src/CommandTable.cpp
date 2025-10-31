@@ -187,24 +187,47 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
   };
 
   commands["switch"] = [&]() {
-    if (inAdvancedMode) {
+    if (inAdvancedMode == true || inDoctorMode == true) {
       cout << "\n----------------------------\n\n";
       cout << "Switching to NORMAL Mode...\n";
       cout << "\n----------------------------\n";
 
       inAdvancedMode = false;
-    }
-    else {
-      if (checkPassword("data/password.txt")) {
-        cout << "\n----------------------------\n\n";
-        cout << "Switching to ADVANCED Mode...\n";
-        cout << "\n----------------------------\n";
+      inDoctorMode = false;
 
-        inAdvancedMode = true;
-      }
-      else
-        cout << "\n##########Access Denied##########\n";
+      return;
     }
+
+    cout << "TO SWITCH IN PATIENT MODE ENTER 1\n";
+    cout << "TO SWITCH IN DOCTOR MODE ENTER 2\n";
+    cout << "Enter your choice: ";
+    int ch;
+    cin >> ch;
+
+    if (cin.fail()) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cerr << "\nError: Please enter numeric values only. Try again with the same command...\n\n";
+    }
+
+    switch (ch) {
+      case 1:
+        if (checkPassword("data/passwordDoctor.txt")) {
+          cout << "\n----------------------------\n\n";
+          cout << "Switching to ADVANCE Mode...\n";
+          cout << "\n----------------------------\n";
+
+          inAdvancedMode = true;
+        }
+      case 2:
+        if (checkPassword("data/passwordDoctor.txt")) {
+          cout << "\n----------------------------\n\n";
+          cout << "Switching to DOCTOR Mode...\n";
+          cout << "\n----------------------------\n";
+
+          inDoctorMode = true;
+        }
+    } 
   };
 
   commands["cls"] = [&]() {
