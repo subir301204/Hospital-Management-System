@@ -212,13 +212,15 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
 
     switch (ch) {
       case 1:
-        if (checkPassword("data/passwordDoctor.txt")) {
+        if (checkPassword("data/password.txt")) {
           cout << "\n----------------------------\n\n";
           cout << "Switching to ADVANCE Mode...\n";
           cout << "\n----------------------------\n";
 
           inAdvancedMode = true;
         }
+
+        break;
       case 2:
         if (checkPassword("data/passwordDoctor.txt")) {
           cout << "\n----------------------------\n\n";
@@ -227,6 +229,8 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
 
           inDoctorMode = true;
         }
+
+        break;
     } 
   };
 
@@ -487,6 +491,6 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
     saveToFile(data2);
     cout << "\nData saved.\n";
   };
-          
+
   return commands;
 }
