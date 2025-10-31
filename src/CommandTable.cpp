@@ -394,7 +394,7 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
 
       if (cin.fail()) {
         cin.clear();
-        cin.ignore(numeric_limits<stringstream>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cerr << "\nError: Please enter numeric inputs for Doctor experience. Try again...\n\n";
         continue; 
       }
@@ -469,7 +469,7 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
 
       if (cin.fail()) {
         cin.clear();
-        cin.ignore(numeric_limits<stringstream>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cerr << "\nError: Please enter a numeric value. Try again...\n\n";
         continue;
       }
