@@ -537,5 +537,214 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
     changePassword("data/passwordDoctor.txt");
   };
 
+  // Command to edit Doctor's fields
+  commands["edit"] = [&]() {
+    if (!inDoctorMode) {
+      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
+      return;
+    }
+
+    int index = searchDoctor(data2);
+    if (index == -1)
+      cerr << "\nError: Doctor not found.\n";
+
+    cout << "\n=======Choice Menu=======\n";
+    cout << "To chang Doctor's name enter 1\n";
+    cout << "To change Doctor's specialization enter 2\n";
+    cout << "To change Doctor's qualification enter 3\n";
+    cout << "To change Doctor's experience enter 4\n";
+    cout << "To change Doctor's contact number enter 5\n";
+    cout << "To change Doctor's email enter 6\n";
+    cout << "To change Doctor's availability enter 7\n";
+
+    int ch;
+    while (true) {
+      cout << "Enter your choice: ";
+      cin >> ch;
+
+      if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "\nError: Please enter numeric values only. Try again...\n\n";
+        break;
+      }
+    }
+
+    switch (ch) {
+      case 1: {
+        string newName;
+        while (true) {
+          cout << "Enter Doctor's new name: ";
+          getline(cin, newName);
+
+          if (newName.empty()) {
+            cerr << "\nError: Doctor's name cannot be empty. Try again...\n\n";
+            continue;
+          }
+
+          if (!checkDoctorName(newName)) {
+            cerr << "\nError: Invalid Doctor name, Names are only accepted. Try again...\n\n";
+            continue;
+          }
+
+          break;
+        }
+
+        data2[index].setName(newName);
+        break;
+      }
+
+      case 2: {
+        string newSpecialization;
+        while (true) {
+          cout << "Enter Doctor's new Specialization: ";
+          getline(cin, newSpecialization);
+          
+          if (newSpecialization.empty()) {
+            cerr << "\nError: Doctor's specialization cannot be empty. Try again...\n\n";
+            continue;
+          }
+
+          if (!isValidSpecialization(newSpecialization)) {
+            cerr << "\nError: Invalid Specialization.\n";
+            displaySpecialization();
+            cerr << "\nTry again...\n\n";
+            continue;
+          }
+
+          break;
+        }
+
+        data2[index].setSpecialization(newSpecialization);
+        break;
+      }
+
+      case 3: {
+        string newQualification;
+        while (true) {
+          cout << "Enter Doctor's new Qualification: ";
+          getline(cin, newQualification);
+
+          if (newQualification.empty()) {
+            cerr << "\nError: Doctor's Qualification cannot be empty. Try again...\n\n";
+            continue;
+          }
+
+          if (!isValidQualification(newQualification)) {
+            cerr << "\nError: Invalid Qualification.\n";
+            displayQualification();
+            cerr << "\nTry again...\n";
+            continue;
+          }
+
+          break;
+        }
+
+        data2[index].setQualification(newQualification);
+        break;
+      }
+
+      case 4: {
+        int newExperience;
+        while (true) {
+          cout << "Enter Doctor's Updated Experience: ";
+          cin >> newExperience;
+
+          if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "\nError: Please enter numeric inputs for Doctor experience. Try again...\n\n";
+            continue; 
+          }
+
+          if (!isValidExperience(newExperience)) {
+            cerr << "\nError: Invalid Experience value. Try again...\n\n";
+            continue;
+          }
+
+          break;
+        }
+        cin.ignore();
+
+        data2[index].setExperience(newExperience);
+        break;
+      }
+      
+      case 5: {
+        string newContactNumber;
+        while (true) {
+          cout << "Enter Doctor's new Contact Number: ";
+          getline(cin, newContactNumber);
+
+          if (newContactNumber.empty()) {
+            cerr << "\nError: Doctor's contact number cannot be empty. Try again...\n\n";
+            continue;
+          }
+
+          if (!isValidContactNumber(newContactNumber)) {
+            cerr << "\nError: Invalid Contact Number. The number has to be of 10 digits and cannot start wil less than 6. Try again...\n\n";
+            continue;
+          }
+
+          break;
+        }
+
+        data2[index].setContactNumber(newContactNumber);
+        break;
+      }
+
+      case 6: {
+        string newEmail;
+        while (true) {
+          cout << "Enter Doctor's new email: ";
+          getline(cin, newEmail);
+
+          if (newEmail.empty()) {
+            cerr << "\nError: Doctor's Email cannot be empty. Tru again...\n";
+            continue;
+          }
+
+          if (!isValidEmail(newEmail)) {
+            cerr << "\nError: Invalid email. Try again...\n\n";
+            continue;
+          }
+
+          break;
+        }
+
+        data2[index].setEmail(newEmail);
+        break;
+      }
+
+      case 7: {
+        string newAvailable;
+        while (true) {
+          cout << "Enter Doctor's Updated Availability: ";
+          getline(cin, newAvailable);
+
+          if (newAvailable.empty()) {
+            cerr << "\nError: Doctor's availability cannot be empty. Try again...\n\n";
+            continue;
+          }
+
+          if (!isAvailable(newAvailable)) {
+            cerr << "\nError: Invalid input. Try again...\n\n";
+            continue;
+          }
+
+          break;
+        }
+
+        data2[index].setAvailable(newAvailable);
+        break;
+      }
+
+      default:
+        cerr << "\nError: Invalid choice. Try again with the same command...\n\n";
+    }
+
+    saveToFile(data2);
+  };
+
   return commands;
 }
