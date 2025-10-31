@@ -78,7 +78,7 @@ void saveToFile(const vector<Doctor> &data2);
 vector<Doctor> loadFromFileDoctor();
 
 // Function to check Doctor's pin validity
-bool checkDoctorPin(const int &dID);
+bool checkDoctorID(const int &dID);
 
 // Function to search doctor with dID
 int searchDoctor(vector<Doctor> &data2, const int &dID);

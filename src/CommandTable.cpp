@@ -262,6 +262,208 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
     else
       cerr << "\n##########Switch to Advanced Mode for this command##########\n";
   };
+
+  /*
+  -------------------------------------
+  Doctor class commands
+  -------------------------------------
+  */
+
+  // Command to create Doctor records
+  commands["create"] = [&]() {
+    if (!inDoctorMode) {
+      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
+      return;
+    }
+
+    cout << "\n=======Create An Doctor's Record=======\n";
+    int dID, experience, appointmentCount;
+    string name, specialization, qualification, contactNumber, email, available;
+
+    // Get the Doctor's ID form the user
+    while (true) {
+      cout << "Enter Doctor ID: ";
+      cin >> dID;
+
+      if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "\nError: Please enter number values for Doctor's ID. Try again...\n\n";
+        continue;
+      }
+
+      if (!checkDoctorID(dID)) {
+        cerr << "\nError: Invalid Doctor ID. The ID should be of 7 digits. Try again...\n\n";
+        continue;
+      }
+
+      if (searchDoctor(data2, dID)) {
+        cerr << "\nError: Doctor already exist with the same ID. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+    cin.ignore();
+
+    // Get the Doctor's name from the user
+    while (true) {
+      cout << "Enter Doctor name: ";
+      getline(cin, name);
+
+      if (name.empty()) {
+        cerr << "\nError: Doctor's name cannot be empty. Try again...\n\n";
+        continue;
+      }
+
+      if (!checkDoctorName(name)) {
+        cerr << "\nError: Invalid Doctor name, Names are only accepted. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+
+    // Get Doctor's specialization
+    while (true) {
+      cout << "Enter Doctor Specialization: ";
+      getline(cin, specialization);
+      
+      if (specialization.empty()) {
+        cerr << "\nError: Doctor's specialization cannot be empty. Try again...\n\n";
+        continue;
+      }
+
+      if (!isValidSpecialization(specialization)) {
+        cerr << "\nError: Invalid Specialization.\n";
+        displaySpecialization();
+        cerr << "\nTry again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+
+    // Get Doctor's qualification from the user
+    while (true) {
+      cout << "Enter Doctor Qualification: ";
+      getline(cin, qualification);
+
+      if (qualification.empty()) {
+        cerr << "\nError: Doctor's Qualification cannot be empty. Try again...\n\n";
+        continue;
+      }
+
+      if (!isValidQualification(qualification)) {
+        cerr << "\nError: Invalid Qualification.\n";
+        displayQualification();
+        cerr << "\nTry again...\n";
+        continue;
+      }
+
+      break;
+    }
+
+    // Get Doctor's experience in terms of tears
+    while (true) {
+      cout << "Enter Doctor's Years of Experience: ";
+      cin >> experience;
+
+      if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<stringstream>::max(), '\n');
+        cerr << "\nError: Please enter numeric inputs for Doctor experience. Try again...\n\n";
+        continue; 
+      }
+
+      if (!isValidExperience(experience)) {
+        cerr << "\nError: Invalid Experience value. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+    cin.ignore();
+
+    // Get Doctor's contact number
+    while (true) {
+      cout << "Enter Doctor's Contact Number: ";
+      getline(cin, contactNumber);
+
+      if (contactNumber.empty()) {
+        cerr << "\nError: Doctor's contact number cannot be empty. Try again...\n\n";
+        continue;
+      }
+
+      if (!isValidContactNumber(contactNumber)) {
+        cerr << "\nError: Invalid Contact Number. The number has to be of 10 digits and cannot start wil less than 6. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+
+    // Get Doctor's email
+    while (true) {
+      cout << "Enter Doctor's email: ";
+      getline(cin, email);
+
+      if (email.empty()) {
+        cerr << "\nError: Doctor's Email cannot be empty. Tru again...\n";
+        continue;
+      }
+
+      if (!isValidEmail(email)) {
+        cerr << "\nError: Invalid email. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+
+    // Get Doctor's availability
+    while (true) {
+      cout << "Enter Doctor's Availability: ";
+      getline(cin, available);
+
+      if (available.empty()) {
+        cerr << "\nError: Doctor's availability cannot be empty. Try again...\n\n";
+        continue;
+      }
+
+      if (!isAvailable(available)) {
+        cerr << "\nError: Invalid input. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+
+    // Get Doctor's appointmentCount
+    while (true) {
+      cout << "Enter Doctor's Appointment Count: ";
+      cin >> appointmentCount;
+
+      if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<stringstream>::max(), '\n');
+        cerr << "\nError: Please enter a numeric value. Try again...\n\n";
+        continue;
+      }
+
+      if (!isValidAppointmentCount(appointmentCount)) {
+        cerr << "\nError: Invalid input. Try again...\n\n";
+        continue;
+      }
+
+      break;
+    }
+
+    data2.push_back(Doctor(dID, name, specialization, qualification, experience, contactNumber, email, available, appointmentCount));
+
+    saveToFile(data2);
+    cout << "\nData saved.\n";
+  };
           
   return commands;
 }

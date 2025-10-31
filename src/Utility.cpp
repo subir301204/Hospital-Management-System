@@ -347,7 +347,7 @@ vector<Doctor> loadFromFileDoctor() {
 }
 
 // Function to check Doctor's pin validity
-bool checkDoctorPin(const int &dID) {
+bool checkDoctorID(const int &dID) {
   if (dID < 999999 || dID > 10000000)
     return false;
   return true;
