@@ -746,5 +746,22 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
     saveToFile(data2);
   };
 
+  // Command to get all available commands
+  commands["?"] = [&]() {
+    if (!inDoctorMode) {
+      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
+      return;
+    }
+
+    cout << "\n=======All available commands in Doctor mode=======\n";
+    cout << " create          - To create a new Doctor's record.\n";
+    cout << " details         - To see all details about a specific Doctor.\n";
+    cout << " list            - To see all details of all the Doctors.\n";
+    cout << " changepassword  - To change the Doctor mode password.\n";
+    cout << " edit            - To edit any one field of a specific Doctor.\n";
+    cout << " ?               - To see all available commands.\n";
+    cout << " exit            - To exit from the program.\n";
+  };
+
   return commands;
 }
