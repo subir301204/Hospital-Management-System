@@ -22,7 +22,12 @@ int main() {
 
   string cmd;
   while (true) {
-    cout << (inAdvancedMode ? "\n[ADVANCED]>" : "\n>");
+    if (inAdvancedMode)
+      cout << "\n[ADVANCE]> ";
+    else if (inDoctorMode)
+      cout << "\n[DOCTOR]> ";
+    else
+      cout << "\n> ";
     cin >> cmd;
 
     if (commands.count(cmd))

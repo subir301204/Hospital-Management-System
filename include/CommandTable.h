@@ -13,6 +13,9 @@ using namespace std;
 // Global variable for mode flag
 extern bool inAdvancedMode;
 
+// Global variable for Doctor mode flag
+extern bool inDoctorMode;
+
 // Function prototype
 map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<Doctor> &data2);
 
