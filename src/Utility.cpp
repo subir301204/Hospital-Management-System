@@ -83,6 +83,29 @@ bool checkPassword(const string passwordFile) {
   }
 }
 
+// Function to change the switch mode password
+void changePassword(const string passwordFile) {
+  cout << "\n=======Changing the password=======\n";
+  
+  if (checkPassword(passwordFile)) {
+    if (remove(passwordFile.c_str()) == 0) {
+      string newPassword =  getHiddenInput("\nEnter new password: ");
+
+      ofstream fout("data/password.txt");
+
+      if (!fout) {
+        cerr << "\nError: Cannot change the password!!!\n\n";
+        return;
+      }
+
+      fout << newPassword;
+      fout.close();
+
+      cout << "\nPassword changed successfully!!!\n\n";
+    }
+  }
+}
+
 /*
 ------------------------------------
 Patient Utility functions
@@ -244,30 +267,6 @@ bool isValidSex(const string &sex) {
 
 bool isValidWord(const string &wordNo) {
   return (wordNo == "W1" || wordNo == "W2" || wordNo == "W3" || wordNo == "W4" || wordNo == "W5");
-}
-
-// Function to change the switch mode password
-void changePassword() {
-  string passwordFile = "data/password.txt";
-  cout << "\n=======Changing the password=======\n";
-  
-  if (checkPassword("data/password.txt")) {
-    if (remove(passwordFile.c_str()) == 0) {
-      string newPassword =  getHiddenInput("\nEnter new password: ");
-
-      ofstream fout("data/password.txt");
-
-      if (!fout) {
-        cerr << "\nError: Cannot change the password!!!\n\n";
-        return;
-      }
-
-      fout << newPassword;
-      fout.close();
-
-      cout << "\nPassword changed successfully!!!\n\n";
-    }
-  }
 }
 
 /*

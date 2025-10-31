@@ -285,7 +285,7 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
   // Command to change the password 
   commands["changepassword"] = [&]() {
     if (inAdvancedMode)
-      changePassword();
+      changePassword("data/password.txt");
     else
       cerr << "\n##########Switch to Advanced Mode for this command##########\n";
   };

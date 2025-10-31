@@ -63,7 +63,7 @@ bool isValidSex(const string &sex);
 bool isValidWord(const string &wordNo);
 
 // Function to change the password 
-void changePassword(); 
+void changePassword(const string passwordFile); 
 
 /*
 -----------------------------------
