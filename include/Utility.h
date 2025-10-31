@@ -39,7 +39,7 @@ int searchPatient(vector<Patient> &data);
 // string getHiddenInput();
 
 // Function to check password validity
-bool checkPassword();
+bool checkPassword(const string passwordFile);
 
 // Function to delete a specific record from the data/data.txt
 void deleteRecord(vector<Patient> &data, const int lineIndex);

@@ -11,6 +11,7 @@
 #include <fstream>
 
 bool inAdvancedMode = false;
+bool inDoctorMode = false;
 
 using namespace std;
 
@@ -194,7 +195,7 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
       inAdvancedMode = false;
     }
     else {
-      if (checkPassword()) {
+      if (checkPassword("data/password.txt")) {
         cout << "\n----------------------------\n\n";
         cout << "Switching to ADVANCED Mode...\n";
         cout << "\n----------------------------\n";

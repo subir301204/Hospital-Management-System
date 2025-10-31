@@ -13,6 +13,77 @@
 using namespace std;
 
 /*
+----------------------------------
+Universal Utility functions
+----------------------------------
+*/
+
+// Check password
+bool checkPassword(const string passwordFile) {
+  ifstream fin2(passwordFile);
+
+  if (!fin2) {
+    cerr << "\nError: No admin password found!!!\n";
+    cout << "\n=======Create a Password=======\n";
+    string newPassword = getHiddenInput("Enter admin password: ");
+
+    ofstream fout(passwordFile);
+
+    if (!fout) {
+      cerr << "\nError: Cannot create password file!!!\n\n";
+      return false;
+    }
+
+    fout << newPassword;
+    fout.close();
+
+    cout << "\nPassword saved successfully! You won't be asked again.\n";
+    return true;
+  }
+  else
+    fin2.close();
+
+  ifstream fin1(passwordFile);
+
+  if (!fin1) {
+    cerr << "\nError: Cannot open the password file!!!\n\n";
+    return false;
+  }
+
+  fin1.seekg(0, ios::end);
+  if (fin1.tellg() == 0) {
+    fin1.close();
+    cerr << "\nError: File is empty. Deleting...\n\n";
+    if (remove(passwordFile.c_str()) == 0)
+      cout << "\nFile deleted successfully! Try again with \"switch\" command.\n\n";
+    else
+      cerr << "\nError: Could not delete file.\n";
+  }
+
+  ifstream fin(passwordFile);
+
+  if (!fin) {
+    cerr << "\nError: Cannot open the password file!!!\n\n";
+    return false;
+  }
+
+  string passwordStored;
+  getline(fin, passwordStored);
+  fin.close();
+
+  string input = getHiddenInput("Enter admin password: ");
+
+  if (input == passwordStored) {
+    cout << "\nAccess granted!\n";
+    return true;
+  }
+  else {
+    cerr << "\nAccess denied! Wrong password.\n";
+    return false;
+  }
+}
+
+/*
 ------------------------------------
 Patient Utility functions
 ------------------------------------
@@ -116,73 +187,6 @@ int searchPatient(vector<Patient> &data) {
   return -1;
 }
 
-// Check password
-bool checkPassword() {
-  const string passwordFile = "data/password.txt";
-
-  ifstream fin2(passwordFile);
-
-  if (!fin2) {
-    cerr << "\nError: No admin password found!!!\n";
-    cout << "\n=======Create a Password=======\n";
-    string newPassword = getHiddenInput("Enter admin password: ");
-
-    ofstream fout(passwordFile);
-
-    if (!fout) {
-      cerr << "\nError: Cannot create password file!!!\n\n";
-      return false;
-    }
-
-    fout << newPassword;
-    fout.close();
-
-    cout << "\nPassword saved successfully! You won't be asked again.\n";
-    return true;
-  }
-  else
-    fin2.close();
-
-  ifstream fin1(passwordFile);
-
-  if (!fin1) {
-    cerr << "\nError: Cannot open the password file!!!\n\n";
-    return false;
-  }
-
-  fin1.seekg(0, ios::end);
-  if (fin1.tellg() == 0) {
-    fin1.close();
-    cerr << "\nError: File is empty. Deleting...\n\n";
-    if (remove(passwordFile.c_str()) == 0)
-      cout << "\nFile deleted successfully! Try again with \"switch\" command.\n\n";
-    else
-      cerr << "\nError: Could not delete file.\n";
-  }
-
-  ifstream fin(passwordFile);
-
-  if (!fin) {
-    cerr << "\nError: Cannot open the password file!!!\n\n";
-    return false;
-  }
-
-  string passwordStored;
-  getline(fin, passwordStored);
-  fin.close();
-
-  string input = getHiddenInput("Enter admin password: ");
-
-  if (input == passwordStored) {
-    cout << "\nAccess granted!\n";
-    return true;
-  }
-  else {
-    cerr << "\nAccess denied! Wrong password.\n";
-    return false;
-  }
-}
-
 // Delete record
 void deleteRecord(vector<Patient> &data, const int lineIndex) {
   if (lineIndex < 0 || lineIndex >= data.size()) {
@@ -247,7 +251,7 @@ void changePassword() {
   string passwordFile = "data/password.txt";
   cout << "\n=======Changing the password=======\n";
   
-  if (checkPassword()) {
+  if (checkPassword("data/password.txt")) {
     if (remove(passwordFile.c_str()) == 0) {
       string newPassword =  getHiddenInput("\nEnter new password: ");
 
