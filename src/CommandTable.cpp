@@ -528,5 +528,14 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
     fin.close();
   };
 
+  commands["changepassword"] = [&]() {
+    if (!inDoctorMode) {
+      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
+      return;
+    }
+
+    changePassword("data/passwordDoctor.txt");
+  };
+
   return commands;
 }
