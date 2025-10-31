@@ -32,6 +32,14 @@ class Doctor {
     int getAppointmentCount() const;
 
     void displayDetails() const;
+
+    void setName(const string &newName);
+    void setSpecialization(const string &newSpecialization);
+    void setQualification(const string &newQualification);
+    void setExperience(const int &newExperience);
+    void setContactNumber(const string &newContactNumber);
+    void setEmail(const string &newEmail);
+    void setAvailable(const string &newAvailable);
 };
 
 #endif

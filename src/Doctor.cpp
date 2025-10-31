@@ -54,3 +54,31 @@ void Doctor::displayDetails() const {
   cout << "Is Doctor Available?: " << "\n";
   cout << "Number of Appointments Doctor have: " << "\n";
 }
+
+void Doctor::setName(const string &newName) {
+  name = newName;
+}
+
+void Doctor::setSpecialization(const string &newSpecialization) {
+  specialization = newSpecialization;
+}
+
+void Doctor::setQualification(const string &newQualification) {
+  qualification = newQualification;
+}
+
+void Doctor::setExperience(const int &newExperience) {
+  experience = newExperience;
+}
+
+void Doctor::setContactNumber(const string &newContactNumber) {
+  contactNumber = newContactNumber;
+}
+
+void Doctor::setEmail(const string &newEmail) {
+  email = newEmail;
+}
+
+void Doctor::setAvailable(const string &newAvailable) {
+  available = newAvailable;
+}
