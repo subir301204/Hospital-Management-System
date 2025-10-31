@@ -492,5 +492,19 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
     cout << "\nData saved.\n";
   };
 
+  // Command to see a Doctor's details
+  commands["details"] = [&]() {
+    if (!inDoctorMode) {
+      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
+      return;
+    }
+
+    int index = searchDoctor(data2);
+    if (index != -1) 
+      data2[index].displayDetails();
+    else
+      cerr << "\nError: Doctor not found!!!\n\n";
+  };
+
   return commands;
 }
