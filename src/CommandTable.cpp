@@ -506,5 +506,27 @@ map<string, function<void()>> initializeCommands(vector<Patient> &data, vector<D
       cerr << "\nError: Doctor not found!!!\n\n";
   };
 
+  // Command to see the list of all Doctor's details
+  commands["list"] = [&]() {
+    if (!inDoctorMode) {
+      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
+      return;
+    }
+
+    ifstream fin("data/dataDoctor.txt");
+
+    if (!fin) {
+      cerr << "\nError: Cannot open the file!!!\n\n";
+      return;
+    }
+
+    cout << "\n=======List Of Doctors=======\n";
+
+    string line;
+    while (getline(fin, line))
+      cout << line << endl;
+    fin.close();
+  };
+
   return commands;
 }
