@@ -1,3 +1,8 @@
+/*
+This file contails all Utility functions of Patient and Doctor class
+You can use the functions by only using the Utility.h header
+*/
+
 #include "Patient.h"
 #include "Getch_cross.h"
 #include "Doctor.h"

@@ -4,12 +4,21 @@
 #include "Patient.h"
 #include "Doctor.h"
 #include "Getch_cross.h"
-#include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
 
-using namespace std;
+/*
+-----------------------------------
+All Universal Utility Functions
+-----------------------------------
+*/
+
+// Function to check password validity
+bool checkPassword(const string passwordFile);
+
+// Function to change the password 
+void changePassword(const string passwordFile); 
 
 /*
 ------------------------------------
@@ -35,12 +44,6 @@ int searchPatient(const vector<Patient> &data, int id);
 */
 int searchPatient(vector<Patient> &data);
 
-// Function to get hidden inputs
-// string getHiddenInput();
-
-// Function to check password validity
-bool checkPassword(const string passwordFile);
-
 // Function to delete a specific record from the data/data.txt
 void deleteRecord(vector<Patient> &data, const int lineIndex);
 
@@ -61,9 +64,6 @@ bool isValidSex(const string &sex);
 
 // Function to check wordNo validity of the patient
 bool isValidWord(const string &wordNo);
-
-// Function to change the password 
-void changePassword(const string passwordFile); 
 
 /*
 -----------------------------------
