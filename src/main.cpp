@@ -43,12 +43,16 @@ int main() {
     else if (inAdvancedMode) {
       if (commands1.count(cmd))
         commands1[cmd]();
+      else if (commands.count(cmd))
+        commands[cmd]();
       else
         cout << "\nUnknown command. Type '?' for available commands\n";
     }
     else if (inDoctorMode) {
       if (commands2.count(cmd))
         commands2[cmd]();
+      else if (commands.count(cmd))
+        commands[cmd]();
       else
         cout << "\nUnknown command. Type '?' for available commands\n";
     }
