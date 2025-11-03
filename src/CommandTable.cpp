@@ -1,7 +1,8 @@
-#include "Patient.h"
-#include "Doctor.h"
+/*
+This file contains all universal commands 
+This commands can be used in any mode
+*/
 #include "Utility.h"
-#include "Getch_cross.h"
 #include "CommandPatient.h"
 #include "CommandDoctor.h"
 #include <iostream>
@@ -13,6 +14,7 @@
 #include <limits>
 #include <fstream>
 
+// Mode detecting external variables
 bool inAdvancedMode = false;
 bool inDoctorMode = false;
 
@@ -22,21 +24,24 @@ using namespace std;
 map<string, function<void()>> initializeCommands() {
   map<string, function<void()>> commands;
 
+  // Command to see all available commands in the Normal mode
   commands["?"] = [&]() {
-    cout << "\n=======Available Commands=======\n";
-    cout << " create            - Create a new account\n";
+    cout << "\n=======Available Commands In NORMAL Mode=======\n";
+    cout << " create            - Create a new Patient record\n";
     cout << " cls               - Clears the screen\n";
     cout << " switch            - Switch between Normal and Advanced mode\n";
     cout << " ?                 - Show all available commands\n";
     cout << " exit              - Exit the program\n";
   };
 
+  // Command to exit from the program 
   commands["exit"] = [&]() {
     cout << "\nExiting the program...\n";
-    cout << "\nGOODBYE!!!  :)\n\n";
+    cout << "\nGOODBYE!!!\n\n";
     exit(0);
   };
 
+  // Command to switch between modes
   commands["switch"] = [&]() {
     if (inAdvancedMode || inDoctorMode) {
       cout << "\n--------------------------------\n";
@@ -49,7 +54,7 @@ map<string, function<void()>> initializeCommands() {
     }
 
     cout << "\n==========Choice Menu==========\n";
-    cout << "Enter 1 to switch into Advanced mode.\n";
+    cout << "Enter 1 to switch into Patient mode.\n";
     cout << "Enter 2 to switch into Doctor mode.\n";
 
     cout << "Enter your choice: ";
@@ -67,7 +72,7 @@ map<string, function<void()>> initializeCommands() {
       case 1: {
         if (checkPassword("data/password.txt")) {
           cout << "\n--------------------------------\n";
-          cout << "Switching to ADVANCED mode...";
+          cout << "Switching to PATIENT mode...";
           cout << "\n--------------------------------\n";
 
           inAdvancedMode = true;
@@ -91,6 +96,7 @@ map<string, function<void()>> initializeCommands() {
     }
   };
 
+  // Command to clear screen 
   commands["cls"] = [&]() {
     system("clear");
   };
