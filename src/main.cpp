@@ -2,6 +2,7 @@
 #include "Doctor.h"
 #include "Utility.h"
 #include "CommandTable.h"
+#include "CommandDoctor.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -10,13 +11,14 @@
 
 using namespace std;
 
-map<string, function<void() >> initializeCommands(vector<Patient> &accounts);
+// map<string, function<void() >> initializeCommands(vector<Patient> &accounts);
 
 // Main() function
 int main() {
   vector<Patient> data = loadFromFile();
   vector<Doctor> data2 = loadFromFileDoctor(); 
-  auto commands = initializeCommands(data, data2);
+  auto commands = initializeCommands(data);
+  auto commands2 = initializeDoctorCommands(data2);
 
   cout << "\nWelcome to CMD Banking System! Type '?' for commands\n";
 
@@ -32,6 +34,8 @@ int main() {
 
     if (commands.count(cmd))
       commands[cmd]();
+    else if (commands2.count(cmd))
+      commands2[cmd]();
     else
       cout << "\nUnknown command. Type 'help' for available commands\n";
   }
