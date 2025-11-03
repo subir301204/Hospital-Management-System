@@ -6,6 +6,7 @@
 #include <functional>
 #include <vector>
 
+// Function to initialize the Patient command map
 map<string, function<void()>> initializePatientCommands(vector<Patient> &data);
 
 #endif

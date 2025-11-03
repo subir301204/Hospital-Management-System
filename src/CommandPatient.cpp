@@ -1,3 +1,8 @@
+/*
+This file contails all Patient mode commands 
+This commands are only usable from the Patient mode
+*/
+
 #include "Patient.h"
 #include "Utility.h"
 #include "Getch_cross.h"
@@ -13,12 +18,13 @@
 
 using namespace std;
 
+// Function to initialize the Patient command map
 map<string, function<void()>> initializePatientCommands(vector<Patient> &data) {
   map<string, function<void()>> commands;
 
   // Command to create new patient record
   commands["create"] = [&]() {
-    cout << "\n=======Creating An Account=======\n";
+    cout << "\n=======Creating An Patient's Record=======\n";
     int id, age;
     string admissionDate, nameOfPatient, sex, wordNo, underDoctor;
     
@@ -156,7 +162,7 @@ map<string, function<void()>> initializePatientCommands(vector<Patient> &data) {
 
   // Command to show all available command in the Patient mode
   commands["?"] = [&]() {
-    cout << "\n=======Available Commands In Advanced Mode=======\n";
+    cout << "\n=======Available Commands In Patient Mode=======\n";
     cout << " create            - Create a new account\n";
     cout << " details           - Show Patient details\n";
     cout << " cls               - Clears the screen\n";
