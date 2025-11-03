@@ -1,3 +1,8 @@
+/*
+This file is only for the get_cross() function
+To get hidden inputs in both Linux and Windows system
+*/
+
 #ifndef GETCH_CROSS_H
 #define GETCH_CROSS_H
 
