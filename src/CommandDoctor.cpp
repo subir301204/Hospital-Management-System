@@ -1,3 +1,8 @@
+/*
+This file contains all Doctor Mode commends
+This commands are only usable from the Doctor mode
+*/
+
 #include "Doctor.h"
 #include "Utility.h"
 #include "Getch_cross.h"
@@ -12,14 +17,9 @@
 
 using namespace std;
 
+// Function to initialize the Doctor Command map
 map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
   map<string, function<void()>> commands;
-
-  /*
-  -------------------------------------
-  Doctor class commands
-  -------------------------------------
-  */
 
   // Command to create Doctor records
   commands["create"] = [&]() {
@@ -252,6 +252,7 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
     fin.close();
   };
 
+  // Command to change the doctor mode password
   commands["changepassword"] = [&]() {
     if (!inDoctorMode) {
       cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
@@ -482,59 +483,5 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
     cout << " exit            - To exit from the program.\n";
   };
   
-  commands["switch"] = [&]() {
-    if (inAdvancedMode || inDoctorMode) {
-      cout << "\n--------------------------------\n";
-      cout << "Switching to NORMAL mode...";
-      cout << "\n--------------------------------\n";
-
-      inAdvancedMode = false;
-      inDoctorMode = false;
-      return;
-    }
-
-    cout << "\n==========Choice Menu==========\n";
-    cout << "Enter 1 to switch into Advanced mode.\n";
-    cout << "Enter 2 to switch into Doctor mode.\n";
-
-    cout << "Enter your choice: ";
-    int ch;
-    cin >> ch;
-
-    if (cin.fail()) {
-      cin.clear();
-      cin.ignore(numeric_limits<streamsize>::max(), '\n');
-      cerr << "\nError: Please enter only numeric values. Try again with the same command...\n\n";
-      return;
-    }
-
-    switch (ch) {
-      case 1: {
-        if (checkPassword("data/password.txt")) {
-          cout << "\n--------------------------------\n";
-          cout << "Switching to ADVANCED mode...";
-          cout << "\n--------------------------------\n";
-
-          inAdvancedMode = true;
-        }
-        break;
-      }
-      case 2: {
-        if (checkPassword("data/passwordDoctor.txt")) {
-          cout << "\n--------------------------------\n";
-          cout << "Switching to DOCTOR mode...";
-          cout << "\n--------------------------------\n";
-
-          inDoctorMode = true;
-        }
-        break;
-      }
-      default: {
-        cerr << "\nError: Invalid choice. Try again with the same command...\n\n";
-        return;
-      }
-    }
-  };
-
   return commands;
 }

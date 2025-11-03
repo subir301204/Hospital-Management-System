@@ -6,10 +6,7 @@
 #include <functional>
 #include <vector>
 
-using namespace std;
-
-extern bool inDoctorMode;
-
+// Function to initialize the Doctor commands map
 map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2);
 
 #endif
