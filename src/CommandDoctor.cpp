@@ -474,36 +474,14 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
 
   // Command to get all available commands
   commands["?"] = [&]() {
-    if (!inAdvancedMode) {
-      cout << "\n=======Available Commands=======\n";
-      cout << " create            - Create a new account\n";
-      cout << " cls               - Clears the screen\n";
-      cout << " switch            - Switch between Normal and Advanced mode\n";
-      cout << " ?                 - Show all available commands\n";
-      cout << " exit              - Exit the program\n";
-    }
-    else if (inDoctorMode) {
-      cout << "\n=======All available commands in Doctor mode=======\n";
-      cout << " create          - To create a new Doctor's record.\n";
-      cout << " details         - To see all details about a specific Doctor.\n";
-      cout << " list            - To see all details of all the Doctors.\n";
-      cout << " changepassword  - To change the Doctor mode password.\n";
-      cout << " edit            - To edit any one field of a specific Doctor.\n";
-      cout << " ?               - To see all available commands.\n";
-      cout << " exit            - To exit from the program.\n"; 
-    }
-    else {
-      cout << "\n=======Available Commands In Advanced Mode=======\n";
-      cout << " create            - Create a new account\n";
-      cout << " details           - Show Patient details\n";
-      cout << " cls               - Clears the screen\n";
-      cout << " list              - List of details of all patients\n";
-      cout << " switch            - Switch between Normal and Advanced mode\n";
-      cout << " delete            - Delete a specific Patient record\n";
-      cout << " changepassword    - Change the admin password\n";
-      cout << " ?                 - Show all available commands\n";
-      cout << " exit              - Exit the program\n";
-    }
+    cout << "\n=======All available commands in Doctor mode=======\n";
+    cout << " create          - To create a new Doctor's record.\n";
+    cout << " details         - To see all details about a specific Doctor.\n";
+    cout << " list            - To see all details of all the Doctors.\n";
+    cout << " changepassword  - To change the Doctor mode password.\n";
+    cout << " edit            - To edit any one field of a specific Doctor.\n";
+    cout << " ?               - To see all available commands.\n";
+    cout << " exit            - To exit from the program.\n";
   };
   
   commands["switch"] = [&]() {
