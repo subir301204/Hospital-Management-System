@@ -45,7 +45,7 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
           continue;
         }
 
-        if (searchDoctor(data2, dID)) {
+        if (searchDoctor(data2, dID) != -1) {
           cerr << "\nError: Doctor already exist with the same ID. Try again...\n\n";
           continue;
         }
@@ -224,10 +224,11 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
     }
 
     int index = searchDoctor(data2);
-    if (index != -1) 
-      data2[index].displayDetails();
-    else
+    cout << index;
+    if (index == -1) 
       cerr << "\nError: Doctor not found!!!\n\n";
+    else
+      data2[index].displayDetails();
   };
 
   // Command to see the list of all Doctor's details
@@ -237,7 +238,7 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
       return;
     }
 
-    ifstream fin("data/dataDoctor.txt");
+    ifstream fin("data/doctor.txt");
 
     if (!fin) {
       cerr << "\nError: Cannot open the file!!!\n\n";
@@ -291,9 +292,11 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cerr << "\nError: Please enter numeric values only. Try again...\n\n";
-        break;
+        continue;
       }
+      break;
     }
+    cin.ignore();
 
     switch (ch) {
       case 1: {

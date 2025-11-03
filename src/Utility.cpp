@@ -318,7 +318,7 @@ vector<Doctor> loadFromFileDoctor() {
     while (ss >> token)
       tokens.push_back(token);
     
-    if (tokens.size())
+    if (tokens.empty())
       continue;
     
     int appointmentCount = stoi(tokens.back());
@@ -339,7 +339,7 @@ vector<Doctor> loadFromFileDoctor() {
     string name;
     for (size_t i = 0; i < tokens.size(); i++) {
       name += tokens[i];
-      if (i != tokens.size())
+      if (i != tokens.size() - 1)
         name += " ";
     }
 
@@ -370,7 +370,7 @@ int searchDoctor(vector<Doctor> &data2) {
     cerr << "\nError: Invalid input. Try again...\n\n";
   }
 
-  for (int i = 0; i < data2.size(); i++)
+  for (size_t i = 0; i < data2.size(); i++)
     if (data2[i].getID() == id)
       return i;
   
@@ -512,11 +512,7 @@ bool isValidEmail(const string &email) {
 
 // Function to check the doctor's availability
 bool isAvailable(const string &available) {
-  regex pattern(R"(^[A-Z]$)");
-
-  if (regex_match(available, pattern) && (available == "YES" || available == "NO"))
-    return true;
-  return false;
+  return (available =="YES" || available == "NO");
 }
 
 // Function to check doctor's appointmentCount validity
