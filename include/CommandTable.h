@@ -2,7 +2,6 @@
 #ifndef COMMANDTABLE_H
 #define COMMANDTABLE_H
 
-#include "Patient.h"
 #include <map>
 #include <functional>
 #include <vector>
@@ -14,6 +13,6 @@ extern bool inAdvancedMode;
 extern bool inDoctorMode;
 
 // Function prototype
-map<string, function<void()>> initializeCommands(vector<Patient> &data);
+map<string, function<void()>> initializeCommands();
 
 #endif // COMMANDTABLE_H

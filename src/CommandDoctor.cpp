@@ -10,8 +10,6 @@
 #include <string>
 #include <fstream>
 
-bool inDoctorMode = false;
-
 using namespace std;
 
 map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
