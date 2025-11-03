@@ -32,12 +32,24 @@ int main() {
       cout << "\n> ";
     cin >> cmd;
 
-    if (commands.count(cmd))
-      commands[cmd]();
-    else if (commands2.count(cmd))
-      commands2[cmd]();
-    else
-      cout << "\nUnknown command. Type 'help' for available commands\n";
+    if (!inAdvancedMode && !inDoctorMode) {
+      if (commands.count(cmd))
+        commands[cmd]();
+      else
+        cout << "\nUnknown command. Type '?' for available commands\n";
+    }
+    else if (inAdvancedMode) {
+      if (commands.count(cmd))
+        commands[cmd]();
+      else
+        cout << "\nUnknown command. Type '?' for available commands\n";
+    }
+    else if (inDoctorMode) {
+      if (commands2.count(cmd))
+        commands2[cmd]();
+      else
+        cout << "\nUnknown command. Type '?' for available commands\n";
+    }
   }
 
   return 0;
