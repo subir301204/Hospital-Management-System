@@ -218,11 +218,6 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
 
   // Command to see a Doctor's details
   commands["details"] = [&]() {
-    if (!inDoctorMode) {
-      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
-      return;
-    }
-
     int index = searchDoctor(data2);
     if (index == -1) 
       cerr << "\nError: Doctor not found!!!\n\n";
@@ -232,11 +227,6 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
 
   // Command to see the list of all Doctor's details
   commands["list"] = [&]() {
-    if (!inDoctorMode) {
-      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
-      return;
-    }
-
     ifstream fin("data/doctor.txt");
 
     if (!fin) {
@@ -254,21 +244,11 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
 
   // Command to change the doctor mode password
   commands["changepassword"] = [&]() {
-    if (!inDoctorMode) {
-      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
-      return;
-    }
-
     changePassword("data/passwordDoctor.txt");
   };
 
   // Command to edit Doctor's fields
   commands["edit"] = [&]() {
-    if (!inDoctorMode) {
-      cerr << "\n##########Switch to Doctor Mode to access this command##########\n";
-      return;
-    }
-
     int index = searchDoctor(data2);
     if (index == -1)
       cerr << "\nError: Doctor not found.\n";
