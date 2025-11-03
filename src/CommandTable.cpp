@@ -27,7 +27,6 @@ map<string, function<void()>> initializeCommands() {
   // Command to see all available commands in the Normal mode
   commands["?"] = [&]() {
     cout << "\n=======Available Commands In NORMAL Mode=======\n";
-    cout << " create            - Create a new Patient record\n";
     cout << " cls               - Clears the screen\n";
     cout << " switch            - Switch between Normal and Advanced mode\n";
     cout << " ?                 - Show all available commands\n";
