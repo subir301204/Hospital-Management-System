@@ -27,7 +27,7 @@ int main() {
   string cmd;
   while (true) {
     if (inAdvancedMode)
-      cout << "\n[ADVANCE]> ";
+      cout << "\n[PATIENT]> ";
     else if (inDoctorMode)
       cout << "\n[DOCTOR]> ";
     else
