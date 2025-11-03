@@ -2,19 +2,24 @@
 
 ## Introduction
 
-This document provides a comprehensive overview of the Hospital Management System, a command-line application developed in C++. The system is designed to manage patient and doctor information efficiently. It operates in two distinct modes: a standard `Normal Mode` for basic interactions and a secure `Advanced Mode` for administrative tasks, which is protected by a password.
+This document provides a comprehensive overview of the Hospital Management System, a command-line application developed in C++. The system is designed to manage patient and doctor information efficiently. It operates in three distinct modes: a standard `Normal Mode` for basic interactions, a secure `Patient Mode` for administrative tasks and another secure `Doctor Mode`, which are both protected by a password.
 
 ## Features
 
 The Hospital Management System offers the following key features:
 
-- **Dual Operating Modes**: 
+- **Three Operating Modes**: 
   - **Normal Mode**: Provides fundamental commands for creating new patient entries and navigating the system.
-  - **Advanced Mode**: Unlocks administrative functionalities such as viewing detailed patient records, listing all patients, and deleting entries. Access to this mode is restricted via a password.
+  - **Patient Mode**: This mode grant access to all the Patient management commands. This mode is protected by a user defined password.
+  - **Doctor Mode**: This mode grant access to all the Doctor management commands. This mode is protected by a user define password.
 - **Patient Management**:
   - Create, view, list, and delete patient records.
   - Each patient record includes a unique ID, name, age, sex, admission date, ward number, and the name of the attending doctor.
   - Robust input validation is in place for all patient attributes to ensure data integrity.
+- **Doctor Management**:
+  - Create, list, details, delete and edit doctor records.
+  - Each doctor record include a unique ID, name, specialization, qualification, experience, contact number, email, availability, appointment count.
+  - Robust input validation is in place for all doctor attributes to ensure data integrity.
 - **Data Persistence**: 
   - All patient and doctor data is stored in plain text files, ensuring that information is retained across sessions.
 
@@ -49,11 +54,14 @@ To compile and run the application, follow these steps:
 The system is built around two primary classes:
 
 - **`Patient`**: This class represents a patient and encapsulates all the related attributes and functions, such as displaying patient details.
+- **`Doctor`**: This class represent a doctor and encapsulates all the related attributes and functions, such as displaying doctor details.
 
 ## Data Storage
 
 The application uses the following files for data persistence, located in the `data/` directory:
 
 - `data.txt`: Stores the records for all patients.
-- `password.txt`: Securely stores the password required to access the `Advanced Mode`.
+- `data2.txt`: Stores the records for all doctors.
+- `password.txt`: Securely stores the password required to access the `Patient Mode`.
+- `passwordDoctor.txt`: Securely stores the password required to access the `Doctor Mode`.
 
