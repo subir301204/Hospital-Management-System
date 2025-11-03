@@ -7,8 +7,6 @@
 #include <functional>
 #include <vector>
 
-using namespace std;
-
 // Global variable for mode flag
 extern bool inAdvancedMode;
 
