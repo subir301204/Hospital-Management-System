@@ -2,6 +2,7 @@
 This file contains all universal commands 
 This commands can be used in any mode
 */
+
 #include "Utility.h"
 #include "CommandPatient.h"
 #include "CommandDoctor.h"
