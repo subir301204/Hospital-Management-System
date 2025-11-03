@@ -224,7 +224,6 @@ map<string, function<void()>> initializeDoctorCommands(vector<Doctor> &data2) {
     }
 
     int index = searchDoctor(data2);
-    cout << index;
     if (index == -1) 
       cerr << "\nError: Doctor not found!!!\n\n";
     else
