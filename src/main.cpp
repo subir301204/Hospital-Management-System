@@ -12,8 +12,6 @@
 
 using namespace std;
 
-// map<string, function<void() >> initializeCommands(vector<Patient> &accounts);
-
 // Main() function
 int main() {
   vector<Patient> data1 = loadFromFile();
